@@ -1,0 +1,6 @@
+
+sudo apt-get update
+sudo apt-get install python3-pip
+pip3 install Flask
+pip3 install flask flask_sqlalchemy
+pip install pymysql
