@@ -1,5 +1,9 @@
-Module required pytest
+Modules required:
 
+pytest
+flask
+flask_sqlalchemy
+pymysql
 
 
 
@@ -36,7 +40,8 @@ SQL architecture was designed, but may need further inspection
 
 installed pytest
 installed pymysql
-
+installed flask
+installed pymysql
 
 
 
