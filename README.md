@@ -26,10 +26,6 @@ Repo was created and readme file, no modules to add yet
 
     Ideally we could pull everything from an empty virtual machine and have a working aplication loaded in seconds
 
-
-IMPORTANT: We are going to do TDD so, before getting on with the code there will be a new message in the commit history that will mention about testing bein made for posterior code
-
-
 SQL architecture was designed, but may need further inspection
 
 
@@ -43,6 +39,9 @@ installed pymysql
 installed flask
 installed pymysql
 
+Seems this will be all about DBses
+
+Lets crush it
 
 
 
