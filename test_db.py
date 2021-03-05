@@ -33,16 +33,16 @@ def TestDB(Tn):
 
 
 def test():
-    assert TestDB('Dan') == True
+    assert TestDB('Sales') == True
 
 def test1():
-    assert TestDB('person') == True
+    assert TestDB('HR') == True
 
 def test2():
-    assert TestDB('house') == True
+    assert TestDB('employee') == True
 
 def test3():
-    assert TestDB('bollocks') == True
+    assert TestDB('Client') == True
 
 def test4():
-    assert TestDB('My') == True
+    assert TestDB('Expense') == True
