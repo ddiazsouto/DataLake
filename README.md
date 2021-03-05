@@ -1,3 +1,6 @@
+Module required pytest
+
+
 
 
 // Here I will add a description of the project
@@ -29,6 +32,10 @@ SQL architecture was designed, but may need further inspection
 
 
 
+[Second Sprint]:
+
+installed pytest
+installed pymysql
 
 
 
