@@ -10,7 +10,7 @@ by returning True if it finds it or False if it doesn't
                                         // we can recycle it for multiple tests
 """
 
-def TestDB(table_name):            
+def TestDB(Tn):            
 
     Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')
     MySQL=Make.cursor()
@@ -21,21 +21,28 @@ def TestDB(table_name):
     
     for i in tables:                  #     and checks if our table is there yet
 
-        if table_name in str(i):       return True      
-        else:                       return False
-    
+        if str(Tn) in str(i):       
+                                                                                                                #print('passed', type(Tn), type(i), f'{Tn} and {i} are equal? ', Tn in str(i))
+            return True
+
+        else:                       
+                                                                                                                #print(type(Tn), type(i), f'{Tn} and {i} are equal? ', Tn in str(i))
+            continue
+
+
+
 
 def test():
-    assert TestDB('table1') == True
+    assert TestDB('Dan') == True
 
 def test1():
-    assert TestDB('house') == True
+    assert TestDB('person') == True
 
 def test2():
-    assert TestDB('table2') == True
+    assert TestDB('house') == True
 
 def test3():
-    assert TestDB('table3') == True
+    assert TestDB('bollocks') == True
 
 def test4():
-    assert TestDB('table4') == True
+    assert TestDB('My') == True

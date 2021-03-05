@@ -1,3 +1,12 @@
+
+""" 
+        Here we define classes and objects
+        Nothing else
+
+        Keeping code tidy
+
+"""
+
 class student:
     
     def __init__(self, name, age, class_):
