@@ -22,17 +22,28 @@ class Client(db.Model):
 
 class Sales(db.Model):
 
-    #id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, primary_key=True)
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'), nullable=False)
     amount = db.Column(db.Float, nullable=False)
 
-    
+class Expenses(db.Model):
 
-# class HR(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nature = db.Column(db.String(35), nullable=False)
+    vendor = db.Column(db.String(60), nullable=False)
+    reason = db.Column(db.String(100), nullable=True)
+    hr_expenses = db.relationship('hr', backref='expenses')
+    #sales_expenses = relationship()
+    #operations_expenses = relationship()
 
-#     date = db.Column(db.DateTime, primary_key=True)
+class HR(db.Model):
+
+    date = db.Column(db.DateTime, primary_key=True)
+    expense_id = db.Column(db.Integer, db.ForeignKey('expenses.id'), nullable=True)
+    amount = db.Column(db.Integer, nullable=False)
+    details = db.Column(db.String(50), nullable=True)
+
 
 
 

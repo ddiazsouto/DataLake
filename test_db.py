@@ -33,7 +33,7 @@ def TestDB(Tn):
 
 
 def test():
-    assert TestDB('Sales') == True
+    assert TestDB('sales') == True
 
 def test1():
     assert TestDB('HR') == True
@@ -42,7 +42,7 @@ def test2():
     assert TestDB('employee') == True
 
 def test3():
-    assert TestDB('Client') == True
+    assert TestDB('client') == True
 
 def test4():
-    assert TestDB('Expense') == True
+    assert TestDB('xpense') == True
