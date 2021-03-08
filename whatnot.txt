@@ -1,2 +1,7 @@
-python3 tables.py
-pytest tables.py
+Flask
+flask
+flask_sqlalchemy
+pymysql
+pytest
+flask-wtf
+wtforms
