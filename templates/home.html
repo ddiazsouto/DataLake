@@ -2,10 +2,9 @@
 
 <head>
 
-    <h1><center>Header</center></h1><br>
+    <h1><center>Beautiful Data Lake</center></h1>
     <br>
-    <hr>
-    
+    <hr>    
         <style>
             /* Style The Dropdown Button */
             .dropbtn {
@@ -27,17 +26,19 @@
             .dropdown-content {
               display: none;
               position: absolute;
-              background-color: #aaaaff2c;
+              background-color: #aaaaff3f;
               min-width: 160px;
+              border-radius: 7px;
               box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
               z-index: 1;
             }
             
             /* Links inside the dropdown */
             .dropdown-content a {
-              color: black;
+              color: #000000;
               padding: 12px 16px;
               text-decoration: none;
+              border-radius: 3px;
               display: block;
             }
             
@@ -54,25 +55,25 @@
               background-color: #2222ff9c;
             }
             </style>
-            <b>
+            <b><div> &ensp;&ensp;
             <div class="dropdown">
-              <button class="dropbtn">Dropdown</button>
+              <button class="dropbtn">&ensp;&ensp;Main &ensp;&ensp;</button>
               <div class="dropdown-content">
-                <a href="http://www.wikipedia.org">Wiki 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-                <a href="#">Link E</a>
+                <a href="home"><center>Menu</center></a>
+                <a href="#"><center>Get Premium</center></a>
+                <a href="login"><center>Log-in</center></a>
+                <a href="#"><center>About</center></a>
 
               </div>
             </div>
             <div class="dropdown 2">
-                <button class="dropbtn">Dropdown</button>
+                <button class="dropbtn">Navigation</button>
                 <div class="dropdown-content">
-                  <a href="#"><b>Link</b></a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
+                  <a href="#"><b>Overview</b></a>
+                  <a href="#">Sales</a>
+                  <a href="#">HR</a>
                 </div>
-              </div></b>
+              </div></b></div>
               
     
     
@@ -91,6 +92,9 @@
 </head>
 
 <body style=background-color:blue>
+
+    {% block body %}
+    {% endblock body %}
 
     
 </body>
