@@ -1,9 +1,14 @@
+-- versioning
+
 Modules required:
 
 pytest
 flask
 flask_sqlalchemy
 pymysql
+
+
+ -- licensing -- contributors 
 
 
 
@@ -31,18 +36,16 @@ SQL architecture was designed, but may need further inspection
 
 
 
+-- acknowledgements 
 
-[Second Sprint]:
 
-installed pytest
-installed pymysql
-installed flask
-installed pymysql
+This photo has been used as background:
 
-Seems this will be all about DBses
+https://images.hdqwalls.com/wallpapers/lake-reflections-4k-wide.jpg
 
-Lets crush it
+Which is not subject to copyright by the own page definition:     https://hdqwalls.com/copyright
 
+I aknowledge their support to my project
 
 
 
@@ -57,3 +60,7 @@ Lets crush it
         use:
 
             source requirements.txt
+
+
+
+
