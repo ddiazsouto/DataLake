@@ -1,6 +1,6 @@
-{% extends 'home.html' %}
+{% extends 'overview.html' %}
 
-{% block body %}
+{% block menu %}
 
 
 <p></p>
@@ -25,7 +25,7 @@
     <td>
         <center>
 <div class='form'>
-    <form method='POST', action=''>
+    <form method='POST', action='', style=text-align:center , >
         <h4>
         {{ form.hidden_tag() }}
         {{ form.login.label }} &emsp; &emsp;&emsp;&emsp;&ensp;&emsp;&ensp;
@@ -38,7 +38,7 @@
         {{ form.submit }}
         
         <p>
-        <h3>{{message}}</h3>
+        <h4>{{message}}</h4>
     </p>
         
 
@@ -50,5 +50,5 @@
 </center>
 
 
-{% endblock body %}
+{% endblock menu %}
 
