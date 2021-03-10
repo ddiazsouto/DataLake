@@ -15,7 +15,7 @@ class verifyU(FlaskForm):
 
 class new_client(FlaskForm):
 
-    comp_name = StringField('Company name ')
+    company_name = StringField('Company name ')
     contact_name= StringField('Name of the person in contact ')
     contact_surname = StringField('Surname of the person in contact ')
     phone = StringField('Phone number ')
