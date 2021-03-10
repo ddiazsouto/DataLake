@@ -13,11 +13,14 @@ app.config['SECRET_KEY']='dAnIel52'
 
 db=SQLAlchemy(app)
 
-class verifyU(FlaskForm):
 
-    login = StringField('Username: ')
-    passwd= StringField('Password: ')
-    submit= SubmitField('Log in')
+
+
+
+
+
+
+
 
 @app.route('/home')
 @app.route('/')
