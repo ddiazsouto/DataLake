@@ -1,12 +1,19 @@
-from app import Usuarium
+from elementae import Usuarium
 import pytest
 
-def UserTest():
+def Testuser():
 
-    outcome=False
-    trial = Usuarium()
-    start_value=Usuarium.dpt
     
-    assert Usuarium.addpt('HR')==len(start_value + 1)
+    trial = Usuarium()
+    start_value=len(trial.dpt)
+    trial.addpt('HR')
+    if len(trial.dpt) != 0:
+        if len(trial.dpt) == start_value +1:
+            return True
+
+
+def test1():
+    assert Testuser()==True
+
 
         

@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField
 
 from formularium import verifyU, new_client, new_employee, new_expense
+from elementae import Usuarium
 
 app = Flask(__name__)
 
@@ -15,6 +16,17 @@ app.config['SECRET_KEY']='dAnIel52'
 db=SQLAlchemy(app)
 
 
+
+
+# Up until here we deal with the database and the app object,
+#  we need it clear and isolated because we are using it in other files
+
+"""
+Now some logic for the app and dfining objects
+"""
+usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR'}
+
+user = Usuarium()
 
 
 
@@ -31,22 +43,26 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
+
+
     form = verifyU()
     msg=''
 
     if request.method=='POST':
 
         login = form.login.data
-        passwd= form.passwd.data
-
+        passwd= form.passwd.data 
         
 
-        if len(passwd)>5:
+        if login in usuarios:
+
+            department = usuarios[login]
+            user_name=login
             
-                return render_template('overview.html', form=form, title='Overview')
+            return render_template('overview.html', form=form, title='Overview', name=user_name, department=department)
 
         else:
-            msg='Please the password is too short'
+            msg='Please, that is a wrong username'
 
     return render_template('login.html', title='Log-in', form=form, message=msg)
 
