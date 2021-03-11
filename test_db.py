@@ -86,13 +86,14 @@ class TestViews(TestBase):  # This test confirms that the page loads
         self.assertEqual(response.status_code, 200)
         
 
+# Test ready for employee formulary
 
-# class TestAdd(TestBase):
-#     def test_add_post(self):
-#         response = self.client.post(
-#             url_for('home'),
-#             data = dict(name='Dan', surname='Souto', position='Trainee', team='Dara\'s', department='DevOps'),
+class TestAdd(TestBase):
+    def test_add_post(self):
+        response = self.client.post(
+            url_for('home'),
+            data = dict(name='Dan', surname='Souto', position='Trainee', team='Dara\'s', department='DevOps'),
          
-#             follow_redirects=True
-#         )
-#         #self.assertIn(b'Dan',response.data)
+            follow_redirects=True
+        )
+        self.assertIn(b'Dan',response.data)
