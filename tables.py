@@ -8,7 +8,7 @@ class Employee(db.Model):
     position = db.Column(db.String(20), nullable=False)
     team = db.Column(db.String(35), nullable=True)
     department = db.Column(db.String(25), nullable=False)
-    #customer= db.relationship('sales', backref='employee')
+    customer= db.relationship('sales', backref='employee')
 
 class Client(db.Model):
 
@@ -18,7 +18,7 @@ class Client(db.Model):
     contact_surname = db.Column(db.String(30), nullable=True)
     phone = db.Column(db.String(20), nullable=False)
     details = db.Column(db.String(150), nullable=True)
-   # customer= db.relationship('sales', backref='client')
+    customer= db.relationship('sales', backref='client')
 
 class Sales(db.Model):
 
@@ -33,7 +33,7 @@ class Expenses(db.Model):
     nature = db.Column(db.String(35), nullable=False)
     vendor = db.Column(db.String(60), nullable=False)
     reason = db.Column(db.String(100), nullable=True)
-    #hr_expenses = db.relationship('hr', backref='expenses')
+    hr_expenses = db.relationship('hr', backref='expenses')
     
     #sales_expenses = relationship()
     #operations_expenses = relationship()
