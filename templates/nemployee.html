@@ -1,0 +1,24 @@
+{% extends 'overview.html'%}
+
+{% block menu %}
+
+
+<div class=form>
+    <form method='POST', action=''>
+        <p>
+            <br><br>
+        {{form.hidden_tag()}}
+        {{form.emp_name.label}}{{form.emp_name}}<br>
+        {{form.emp_surname.label}}{{form.emp_surname}}<br>
+        {{form.role.label}}{{form.role}}<br>
+        {{form.team.label}}{{form.team}}<br>
+        {{form.department.label}}{{form.department}}<br><br>
+        {{form.add_employee}}
+        </p>
+
+    </form>
+
+</div>
+   
+
+{%endblock menu%}
