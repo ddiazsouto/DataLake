@@ -6,6 +6,13 @@ pytest
 flask
 flask_sqlalchemy
 pymysql
+flask-wtf
+wtforms
+pytest-cov
+sqlalchemy
+flask_testing
+
+
 
 
  -- licensing -- contributors 
