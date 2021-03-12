@@ -1,9 +1,21 @@
+-- versioning
+
 Modules required:
 
 pytest
 flask
 flask_sqlalchemy
 pymysql
+flask-wtf
+wtforms
+pytest-cov
+sqlalchemy
+flask_testing
+
+
+
+
+ -- licensing -- contributors 
 
 
 
@@ -26,24 +38,21 @@ Repo was created and readme file, no modules to add yet
 
     Ideally we could pull everything from an empty virtual machine and have a working aplication loaded in seconds
 
-
-IMPORTANT: We are going to do TDD so, before getting on with the code there will be a new message in the commit history that will mention about testing bein made for posterior code
-
-
 SQL architecture was designed, but may need further inspection
 
 
 
 
-
-[Second Sprint]:
-
-installed pytest
-installed pymysql
-installed flask
-installed pymysql
+-- acknowledgements 
 
 
+This photo has been used as background:
+
+https://images.hdqwalls.com/wallpapers/lake-reflections-4k-wide.jpg
+
+Which is not subject to copyright by the own page definition:     https://hdqwalls.com/copyright
+
+I aknowledge their support to my project
 
 
 
@@ -58,3 +67,7 @@ installed pymysql
         use:
 
             source requirements.txt
+
+
+
+
