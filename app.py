@@ -38,7 +38,7 @@ db=SQLAlchemy(app)
 # Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')    <<<----  Use this for presentation, this one goes to the cloud
 Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
 MySQL=Make.cursor()
-#                        I need to make this into a function
+#                        I need to make this into an object
 def sudo():
     Make.commit()
 
@@ -115,11 +115,10 @@ def sales():
 
             MySQL.execute(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
             sudo()
-            # new_entry=Client(company_name=company_name, contact_name=contact_name, phone=phone )
-            # db.session.add(new_entry)
+            grab_data.company_name.data = grab_data.contact_name.data = grab_data.contact_surname.data = ''
+            grab_data.phone.data = grab_data.details.data = ''
 
-
-            return render_template('client.html', title='New Client', message=msg, form=grab_data)
+            msg = 'New employee added'
 
         else:
             msg='Please, fill in all required fields'
