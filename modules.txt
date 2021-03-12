@@ -7,3 +7,4 @@ flask-wtf
 wtforms
 pytest-cov
 sqlalchemy
+flask_testing
