@@ -1,12 +1,27 @@
-
+# External modules
+import pymysql
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm 
 from wtforms import StringField, SubmitField, IntegerField
+# Those were the external modules 
 
-
+# Internal modules:
 from formularium import verifyU, new_client, new_employee, new_expense
 from elementae import Usuarium
+
+# Those were the internal modules
+
+
+"""
+Up here the app and database configuration are defined as well as their connections to python
+
+First the connection the database through SQLAlchemy
+
+Then the connection through pymysql
+
+"""
+
 
 app = Flask(__name__)
 
@@ -15,20 +30,25 @@ app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:Buddhassister22@127.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['SECRET_KEY']='dAnIel52'
 
+
 db=SQLAlchemy(app)
 
 
 
-
-# Up until here we deal with the database and the app object,
-#  we need it clear and isolated because we are using it in other files
+# Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')    <<<----  Use this for presentation, this one goes to the cloud
+Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
+MySQL=Make.cursor()
+#                        I need to make this into a function
+def sudo():
+    Make.commit()
 
 """
-Now some logic for the app and dfining objects
+Now some logic for the app and its routes
+
 """
 
 
-user = Usuarium()
+user = Usuarium()                         # We create an object to control the user login
 
 
 
@@ -41,6 +61,8 @@ user = Usuarium()
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -87,10 +109,16 @@ def sales():
         phone = grab_data.phone.data                    #   so we can 
         details= grab_data.details.data             #   manipulate them
                                                  # with posterior logic
+        print(type(company_name))
 
         if len(contact_name)*len(company_name)*len(phone) != 0:
+
+            MySQL.execute(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
+            sudo()
             # new_entry=Client(company_name=company_name, contact_name=contact_name, phone=phone )
             # db.session.add(new_entry)
+
+
             return render_template('client.html', title='New Client', message=msg, form=grab_data)
 
         else:
@@ -145,3 +173,6 @@ def expenses():
 
 if __name__=='__main__':
     app.run(debug=True)
+
+Make.close()
+MySQL.close()
