@@ -4,12 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm 
 from wtforms import StringField, SubmitField, IntegerField
 
+
 from formularium import verifyU, new_client, new_employee, new_expense
 from elementae import Usuarium
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:645202398@34.121.192.21/main'
+# app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:645202398@34.121.192.21/main'    ---->>> Original (this one goes to production and to the cloud)
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:Buddhassister22@127.0.0.1/main'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['SECRET_KEY']='dAnIel52'
 
@@ -24,7 +26,7 @@ db=SQLAlchemy(app)
 """
 Now some logic for the app and dfining objects
 """
-usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR'}
+
 
 user = Usuarium()
 
@@ -50,16 +52,16 @@ def login():
 
     if request.method=='POST':
 
-        login = form.login.data
-        passwd= form.passwd.data 
         
+        if user.check(form.login.data, form.passwd.data ) == True:
 
-        if login in usuarios:
 
-            department = usuarios[login]
-            user_name=login
-            
-            return render_template('overview.html', form=form, title='Overview', name=user_name, department=department)
+            if user.department() == 'Sales':
+                return render_template('dpt-sales.html', form=form, title='Sales', name=user.name(), department=user.department(), user=user)
+
+            elif user.department() == 'HR':
+                return render_template('dpt-hr.html', form=form, title='HR', name=user.name(), department=user.department())
+
 
         else:
             msg='Please, that is a wrong username'
@@ -67,26 +69,39 @@ def login():
     return render_template('login.html', title='Log-in', form=form, message=msg)
 
 
-@app.route('/sales', methods=['GET', 'POST'])
+
+
+
+@app.route('/add-client', methods=['GET', 'POST'])
 def sales():
+
     grab_data = new_client()
+    msg=''
 
     if request.method=='POST':
 
-        company_name = grab_data.company_name.data
-        contact_name = grab_data.contact_name.data
-        contact_surname = grab_data.contact_surname.data
-        phone = grab_data.phone.data
-        details= grab_data.details.data
+        
+        company_name = grab_data.company_name.data  #   Assigning value
+        contact_name = grab_data.contact_name.data  #   to the variables    
+        contact_surname = grab_data.contact_surname.data    #   internally
+        phone = grab_data.phone.data                    #   so we can 
+        details= grab_data.details.data             #   manipulate them
+                                                 # with posterior logic
 
-            #       Missing the logic in here
+        if len(contact_name)*len(company_name)*len(phone) != 0:
+            # new_entry=Client(company_name=company_name, contact_name=contact_name, phone=phone )
+            # db.session.add(new_entry)
+            return render_template('client.html', title='New Client', message=msg, form=grab_data)
+
+        else:
+            msg='Please, fill in all required fields'
 
 
-    return render_template('sales.html', title='Sales Department', form=grab_data)
+    return render_template('client.html', title='New Client', message=msg,  form=grab_data)
 
 
 
-@app.route('/new_employee', methods=['GET', 'POST'])
+@app.route('/new-employee', methods=['GET', 'POST'])
 def nemployee():
 
     grab_data = new_employee()
@@ -99,6 +114,8 @@ def nemployee():
         role = grab_data.role.data
         team = grab_data.team.data
         department= grab_data.department.data
+
+        # Missing logic here
         
 
     return render_template('nemployee.html', title='New employee', form=grab_data)

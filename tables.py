@@ -1,5 +1,7 @@
 from app import db
 
+
+
 class Employee(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
@@ -49,5 +51,5 @@ class HR(db.Model):
 
 
 
-# db.drop_all()
-# db.create_all()
+db.drop_all()
+db.create_all()

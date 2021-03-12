@@ -1,0 +1,34 @@
+{% extends 'home.html' %}
+
+
+{% block body %}
+
+<style>
+
+    form{
+    width:420px;
+    height:270px;
+    background-color: #ffffff55;
+    border-radius:7px;    
+    text-align: right;
+    padding: 80px 80px;
+       
+    }
+    
+
+</style> 
+Hi {{name}}
+dept = {{department}}
+
+<table><td>
+
+
+{% block menu %}
+{% endblock menu %}
+
+
+</td></table>
+
+
+{% endblock body %}
+
