@@ -103,12 +103,12 @@ def sales():
     if request.method=='POST':
 
         
-        company_name = grab_data.company_name.data  #   Assigning value
-        contact_name = grab_data.contact_name.data  #   to the variables    
-        contact_surname = grab_data.contact_surname.data    #   internally
-        phone = grab_data.phone.data                    #   so we can 
-        details= grab_data.details.data             #   manipulate them
-                                                 # with posterior logic
+        company_name = grab_data.company_name.data        #   Assigning value
+        contact_name = grab_data.contact_name.data        #   to the variables    
+        contact_surname = grab_data.contact_surname.data  #   internally
+        phone = grab_data.phone.data                      #   so we can 
+        details= grab_data.details.data                   #   manipulate them
+                                                        # with posterior logic
         print(type(company_name))
 
         if len(contact_name)*len(company_name)*len(phone) != 0:
