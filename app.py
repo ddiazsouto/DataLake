@@ -8,7 +8,7 @@ from wtforms import StringField, SubmitField, IntegerField
 
 # Internal modules:
 from formularium import verifyU, new_client, new_employee, new_expense
-from elementae import Usuarium
+from elementae import Usuarium, DanSQL
 
 # Those were the internal modules
 
@@ -17,8 +17,6 @@ from elementae import Usuarium
 Up here the app and database configuration are defined as well as their connections to python
 
 First the connection the database through SQLAlchemy
-
-Then the connection through pymysql
 
 """
 
@@ -36,11 +34,11 @@ db=SQLAlchemy(app)
 
 
 # Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')    <<<----  Use this for presentation, this one goes to the cloud
-Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
-MySQL=Make.cursor()
-#                        I need to make this into an object
-def sudo():
-    Make.commit()
+# Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
+# MySQL=Make.cursor()
+# #                        I need to make this into an object
+# def sudo():
+#     Make.commit()
 
 """
 Now some logic for the app and its routes
@@ -50,7 +48,7 @@ Now some logic for the app and its routes
 
 user = Usuarium()                         # We create an object to control the user login
 
-
+MySQL=DanSQL()
 
 
 
@@ -109,12 +107,11 @@ def sales():
         phone = grab_data.phone.data                      #   so we can 
         details= grab_data.details.data                   #   manipulate them
                                                         # with posterior logic
-        print(type(company_name))
-
+        
         if len(contact_name)*len(company_name)*len(phone) != 0:
 
-            MySQL.execute(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
-            sudo()
+            MySQL.write(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
+            MySQL.sudo()
             grab_data.company_name.data = grab_data.contact_name.data = grab_data.contact_surname.data = ''
             grab_data.phone.data = grab_data.details.data = ''
 
@@ -132,6 +129,7 @@ def sales():
 def nemployee():
 
     grab_data = new_employee()
+    msg =''
 
 
     if request.method=='POST':
@@ -140,12 +138,18 @@ def nemployee():
         emp_surname= grab_data.emp_surname.data
         role = grab_data.role.data
         team = grab_data.team.data
-        department= grab_data.department.data
-
-        # Missing logic here
+        department= user.department()   #   Department defined automatically
         
+        if len(emp_name)*len(emp_surname)*len(role)*len(team) != 0 :
 
-    return render_template('nemployee.html', title='New employee', form=grab_data)
+            MySQL.write(f"INSERT INTO employee(name, surname, position, team, department) VALUES('{emp_name}','{emp_surname}','{role}','{team}','{department}');")
+            MySQL.sudo()
+            grab_data.emp_name.data = grab_data.emp_surname.data = grab_data.role.data = grab_data.team.data = ''
+            
+        else:
+            msg = 'Please fill in the required fields'
+
+    return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
 
 
 @app.route('/expenses', methods=['GET', 'POST'])
@@ -172,6 +176,3 @@ def expenses():
 
 if __name__=='__main__':
     app.run(debug=True)
-
-Make.close()
-MySQL.close()
