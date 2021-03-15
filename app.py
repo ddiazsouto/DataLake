@@ -165,7 +165,7 @@ def expenses():
         reason = grab_data.reason.data
 
 
-    return render_template('expenses.html', title='Expenses page', form=grab_data)        
+    return render_template('expenses.html', title='Expenses page', form=grab_data, user=user)        
 
 
 

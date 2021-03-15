@@ -3,7 +3,7 @@ import pymysql
 from flask_testing import TestCase
 from flask import url_for
 
-from app import app, db, MySQL
+from app import app, db
 from tables import Expenses, Sales, Employee, HR, Client
 
 
@@ -27,12 +27,8 @@ def TestDB(Tn):
     for i in tables:                  #     and checks if our table is there yet
 
         if str(Tn) in str(i):       
-                                                                                                                #print('passed', type(Tn), type(i), f'{Tn} and {i} are equal? ', Tn in str(i))
             return True
 
-        else:                       
-                                                                                                                #print(type(Tn), type(i), f'{Tn} and {i} are equal? ', Tn in str(i))
-            continue
 
     #           Now we call those functions to check whether the databases exist
 def test():
@@ -85,16 +81,35 @@ class TestViews(TestBase):  # This test confirms that the page loads
     def test_home_get(self):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
+
+    def test_login(self):
+        response = self.client.get(url_for('login'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_newemp(self):
+        response = self.client.get(url_for('nemployee'))
+        self.assertEqual(response.status_code, 200)
         
+    def test_expenses(self):
+        response = self.client.get(url_for('expenses'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_sales(self):
+        response = self.client.get(url_for('sales'))
+        self.assertEqual(response.status_code, 200)
+        
+    def client(self):
+        response = self.client.get(url_for('client'))
+        self.assertEqual(response.status_code, 200)
 
 # Test ready for employee formulary
 
-class TestAdd(TestBase):
-    def test_add_post(self):
-        response = self.client.post(
-            url_for('home'),
-            data = dict(name='Dan', surname='Souto', position='Trainee', team='Dara\'s', department='DevOps'),
+# class TestAdd(TestBase):
+#     def test_add_post(self):
+#         response = self.client.post(
+#             url_for('home'),
+#             data = dict(name='Dan', surname='Souto', position='Trainee', team='Dara\'s', department='DevOps'),
          
-            follow_redirects=True
-        )
+#             follow_redirects=True
+#         )
         #self.assertIn(b'Dan',response.data)

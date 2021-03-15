@@ -23,8 +23,8 @@ class MyAlchemy():
             attempt = DanSQL()
             return True
         
-        except:
-            return False
+        except: return False
+            
 
     
 
@@ -34,10 +34,12 @@ class MyAlchemy():
         
         attempt.write('CREATE DATABASE testbase')
         attempt.write('use testbase')
+        
         attempt.write('CREATE TABLE Test(column1 VARCHAR(10));')
         attempt.write(f'INSERT INTO test(column1) values({str(value)});')   
         
         var = attempt.get('SELECT * FROM test;')
+
         attempt.write('DROP DATABASE testbase;')
 
         return str(var)       
@@ -52,10 +54,11 @@ def test2():                            # Checks the efficiency of class Usuariu
 def test3():                            # Checks that the conection with the database is successful for the object
     assert MyAlchemy.connects() == True
 
-def test4():                            # Checks that the object can interact with the database
+def test4():                            # Checks that the object can interact with the database using an integer
     assert '127' in MyAlchemy.creates(127)
 
-
+def test5():                            # Checks that the object can interact with the database using a string
+    assert 'Dan' in MyAlchemy.creates("'Dan'")
 
 
         

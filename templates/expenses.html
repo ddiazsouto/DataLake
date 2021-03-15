@@ -1,4 +1,14 @@
-{% extends 'overview.html' %}
+
+{% if user.department()=='Sales' %}
+
+{% extends 'dpt-sales.html'%}
+
+{% elif user.department()=='HR' %}
+
+{% extends 'dpt-hr.html' %}
+
+{% endif %}
+
 
 {% block menu %}
 
