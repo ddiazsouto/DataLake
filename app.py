@@ -111,11 +111,11 @@ def sales():
         if len(contact_name)*len(company_name)*len(phone) != 0:
 
             MySQL.write(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
-            MySQL.sudo()
+            
             grab_data.company_name.data = grab_data.contact_name.data = grab_data.contact_surname.data = ''
             grab_data.phone.data = grab_data.details.data = ''
 
-            msg = 'New employee added'
+            msg = 'New client added'
 
         else:
             msg='Please, fill in all required fields'
@@ -143,8 +143,9 @@ def nemployee():
         if len(emp_name)*len(emp_surname)*len(role)*len(team) != 0 :
 
             MySQL.write(f"INSERT INTO employee(name, surname, position, team, department) VALUES('{emp_name}','{emp_surname}','{role}','{team}','{department}');")
-            MySQL.sudo()
             grab_data.emp_name.data = grab_data.emp_surname.data = grab_data.role.data = grab_data.team.data = ''
+
+            msg = 'new employee added'
             
         else:
             msg = 'Please fill in the required fields'
@@ -176,3 +177,5 @@ def expenses():
 
 if __name__=='__main__':
     app.run(debug=True)
+
+MySQL.off()

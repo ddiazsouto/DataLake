@@ -10,7 +10,9 @@ class Usuarium():
         
     def check(self, login, passwd):
 
-        if login in usuarios:
+        clave='QA123@'
+
+        if login in usuarios and passwd == clave:
 
             department = usuarios[login]
             self.nm.append(login)
@@ -39,6 +41,12 @@ class DanSQL():
     def write(self, str):
 
         self.MySQL.execute(str)
+        self.sudo()
+
+    def get(self, str):
+        
+        self.MySQL.execute(str)
+        return self.MySQL.fetchall()
 
     def off(self):
        
