@@ -93,7 +93,7 @@ def login():
 
 
 @app.route('/add-client', methods=['GET', 'POST'])
-def sales():
+def client():
 
     grab_data = new_client()
     msg=''
@@ -168,7 +168,13 @@ def expenses():
     return render_template('expenses.html', title='Expenses page', form=grab_data, user=user)        
 
 
+@app.route('/sales')
+def sales():
+    return render_template('dpt-sales.html', title='Sales', user=user)
 
+@app.route('/HR')
+def HR():
+    return render_template('dpt-hr.html', title='Human Resources', user=user)
 
 
 """     Here the app runs       and lives       not to touch        leave alone     logic above

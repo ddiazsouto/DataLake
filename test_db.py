@@ -97,6 +97,10 @@ class TestViews(TestBase):  # This test confirms that the page loads
     def test_sales(self):
         response = self.client.get(url_for('sales'))
         self.assertEqual(response.status_code, 200)
+
+    def test_sales(self):
+        response = self.client.get(url_for('HR'))
+        self.assertEqual(response.status_code, 200)
         
     def client(self):
         response = self.client.get(url_for('client'))

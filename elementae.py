@@ -21,10 +21,16 @@ class Usuarium():
             return True
 
     def name(self):
-        return self.nm[len(self.nm)-1]
+        try:
+            return self.nm[len(self.nm)-1]
+        except: return None
+            
 
     def department(self):
-        return self.dpt[len(self.dpt)-1]
+        try:
+            return self.dpt[len(self.dpt)-1]
+        except: return None
+            
 
 
 class DanSQL():
@@ -44,7 +50,7 @@ class DanSQL():
         self.sudo()
 
     def get(self, str):
-        
+
         self.MySQL.execute(str)
         return self.MySQL.fetchall()
 

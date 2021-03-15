@@ -1,14 +1,21 @@
 from elementae import Usuarium, DanSQL
 import pytest
 
-def Testuser(any):
+class Testuser():
 
-    
-    trial = Usuarium()
-    start_value=len(trial.dpt)
-    trial.check(any, 'QA123@')
-    if len(trial.dpt) != 0:
-        if len(trial.dpt) == start_value +1:
+    def run(any):
+        trial = Usuarium()
+        start_value=len(trial.dpt)
+        trial.check(any, 'QA123@')
+        if len(trial.dpt) != 0:
+            if len(trial.dpt) == start_value +1:
+                return True
+
+    def nombre(any):
+        trial = Usuarium()
+        start_value=len(trial.nm)
+        trial.check(any, 'QA123@')
+        if trial.name() == any:
             return True
 
 
@@ -24,9 +31,7 @@ class MyAlchemy():
             return True
         
         except: return False
-            
-
-    
+               
 
     def creates(value):
 
@@ -45,19 +50,27 @@ class MyAlchemy():
         return str(var)       
 
 
+
+
+def test0():                            # Checks the efficiency of class Usuarium in taking user Daniel
+    assert Testuser.run('Daniel') == True
+
 def test1():                            # Checks the efficiency of class Usuarium in taking user Daniel
-    assert Testuser('Daniel') == True
+    assert Testuser.nombre('Daniel') == True
 
 def test2():                            # Checks the efficiency of class Usuarium in taking user Wesley
-    assert Testuser('Wesley') == True
+    assert Testuser.run('Wesley') == True
 
-def test3():                            # Checks that the conection with the database is successful for the object
+def test3():                            # Checks the efficiency of class Usuarium in taking user Wesley
+    assert Testuser.nombre('Wesley') == True
+
+def test4():                            # Checks that the conection with the database is successful for the object
     assert MyAlchemy.connects() == True
 
-def test4():                            # Checks that the object can interact with the database using an integer
+def test5():                            # Checks that the object can interact with the database using an integer
     assert '127' in MyAlchemy.creates(127)
 
-def test5():                            # Checks that the object can interact with the database using a string
+def test6():                            # Checks that the object can interact with the database using a string
     assert 'Dan' in MyAlchemy.creates("'Dan'")
 
 

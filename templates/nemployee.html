@@ -7,8 +7,15 @@
 
 {% extends 'dpt-hr.html' %}
 
+{% else %}
+
+{% extends 'home.html' %}
+
 {% endif %}
 
+
+
+{%if user.department() == 'Sales' or user.department() == 'HR' %}
 
 {% block menu %}
 
@@ -33,3 +40,14 @@
    
 
 {%endblock menu%}
+
+{% else %}
+
+
+<h4>
+Hi{{user.name()}}, you are not logged-in
+</h4>
+
+
+
+{% endif %}
