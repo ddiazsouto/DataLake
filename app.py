@@ -170,7 +170,10 @@ def expenses():
 
 @app.route('/sales')
 def sales():
-    return render_template('dpt-sales.html', title='Sales', user=user)
+
+    a=MySQL.get('SELECT * from client')
+
+    return render_template('dpt-sales.html', title='Sales', user=user, list=a)
 
 @app.route('/HR')
 def HR():

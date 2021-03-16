@@ -24,8 +24,14 @@ This is Sales
 
 {% block menu %}
 
-Hi {{name}}
-dept = {{department}}
+Hi {{user.name()}}
+dept = {{user.department()}}
+
+<p>{%for i in list%}
+{% for j in i %} <br>           
+</p>
+{% endfor %}
+{% endfor %}
 
 {% endblock menu %}
 
