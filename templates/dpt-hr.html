@@ -1,6 +1,7 @@
 {% extends 'home.html' %}
 
 
+
 {% block body %}
 
 This is HR
@@ -16,21 +17,58 @@ This is HR
     padding: 80px 80px;
        
     }
+
+    .frame{
+
+
+    background-color: #ffffff55;
+    border-radius:7px;    
+    text-align: right;
+    padding: 15px 15px;
+        
+    }
+
+    td{
+        background-color: #ffffff55;
+        padding: 25px 35px;
+        border-style: double;
+        border-radius:10px;
+    }
     
 
 </style> 
-Hi {{name}}
-dept = {{department}}
 
-<table><td>
 
 
 {% block menu %}
+<center>
+Hi {{user.name()}}
+dept = {{user.department()}}
+
+<table class="frame", style=width:400px; >
+{%for element in list%}
+<td>
+{% for j in element %}
+
+{{j}}
+{% endfor %}
+</td> 
+
+{% endfor %}
+
+&ensp;
+</table> 
+{{list}}
+
+
+</center>
+
+
 {% endblock menu %}
 
 
-</td></table>
 
 
 {% endblock body %}
+
 

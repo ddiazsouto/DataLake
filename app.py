@@ -171,13 +171,16 @@ def expenses():
 @app.route('/sales')
 def sales():
 
-    a=MySQL.get('SELECT * from client')
+    list=MySQL.get('SELECT * from client;')
 
-    return render_template('dpt-sales.html', title='Sales', user=user, list=a)
+    return render_template('dpt-sales.html', title='Sales', user=user, list=list)
 
 @app.route('/HR')
 def HR():
-    return render_template('dpt-hr.html', title='Human Resources', user=user)
+
+    list=MySQL.get('SELECT * from HR;')
+
+    return render_template('dpt-hr.html', title='Human Resources', user=user, list=list)
 
 
 """     Here the app runs       and lives       not to touch        leave alone     logic above

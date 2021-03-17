@@ -44,7 +44,7 @@ class HR(db.Model):
 
     date = db.Column(db.DateTime, primary_key=True)
     expense_id = db.Column(db.Integer, db.ForeignKey('expenses.id'), nullable=True)
-    amount = db.Column(db.Integer, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
     details = db.Column(db.String(50), nullable=True)
 
 
