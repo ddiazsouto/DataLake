@@ -188,6 +188,12 @@ def expenses():
 
 
 
+@app.route('/deals', methods=['GET', 'POST'])
+def deals():
+      
+
+    return render_template('deals.html', title='Human Resources', user=user)
+
 
 
 @app.route('/sales')
