@@ -1,11 +1,8 @@
 <html>
 
 <head>
-    <p>
-    <h1><center>Beautiful Data Lake</center></h1> </p>
-    <br>
     
-    <hr>    
+
         <style>
             /* Style The Dropdown Button */
             .dropbtn {
@@ -55,49 +52,82 @@
             .dropdown:hover .dropbtn {
               background-color: #2222ff9c;
             }
-            </style>
-            <b><div> &ensp;&ensp;
-            <div class="dropdown">
-              <button class="dropbtn">&ensp;&ensp;Main &ensp;&ensp;</button>
-              <div class="dropdown-content">
-                <a href="home"><center>Menu</center></a>
-                <a href="#"><center>Get Premium</center></a>
-                <a href="login"><center>Log-in</center></a>
-                <a href="#"><center>About</center></a>
 
-              </div>
-            </div>
+            .heady{
+              color: #aaaaaa;
+              font-size: 18px;
+              width: auto;
+              position: static;
+              position: sticky;
+              background-color: #ffffffaa;
+              padding-top: 1px;
+              font-family: garamond;
 
-            <div class="dropdown 2">
-                <button class="dropbtn">Navigation</button>
-                <div class="dropdown-content">
-                  <a href="expenses"><b>New Expense</b></a>
-                  <a href="add-client">Client</a>
-                  <a href="new-employee">New Employee</a>
-                </div>
-              </div></b>
-            
-            </div>
-              
-    
-    
+            }
 
-    <style>  
-        body  
-        {  
+            body  {  
         background-image:url("https://images.hdqwalls.com/wallpapers/lake-reflections-4k-wide.jpg");  
         background-size: cover;
+        position:static;
         border: 2px solid #cccccc;
         background-repeat: no-repeat;
  
         }  
-        </style>  
+
+
+
+            </style>
+
+
+            <div class="heady">
+              <td>
+
+              <p>
+                <h1><center>Beautiful Data Lake</center></h1> </p>
+                                
+                <hr>    
+              </td>
+            </div>
+
+
+
+
+              
+    
+    
+
 
 </head>
 
 <body style=background-color:white>
 
-    {% block body %}
+  
+  {% block body %}
+
+  <div> &ensp;&ensp; <b>
+    <div class="dropdown">
+      <button class="dropbtn">&ensp;&ensp;Main &ensp;&ensp;</button>
+      <div class="dropdown-content">
+        <a href="home"><center>Menu</center></a>
+        <a href="#"><center>Get Premium</center></a>
+        <a href="login"><center>Log-in</center></a>
+        <a href="#"><center>About</center></a>
+
+      </div>
+    </div>
+
+    <!-- <div class="dropdown 2">
+        <button class="dropbtn">Navigation</button>
+        <div class="dropdown-content">
+          <a href="expenses"><b>New Expense</b></a>
+          <a href="add-client">Client</a>
+          <a href="new-employee">New Employee</a>
+        </div>
+      </div>
+     -->
+    </div>
+  </b>
+
     {% endblock body %}
 
     
