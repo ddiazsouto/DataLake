@@ -192,15 +192,20 @@ def expenses():
 @app.route('/sales')
 def sales():
 
-    list=MySQL.get('SELECT * from client;')
+    list=[]
+
+    if request.method=='GET':
+        list=MySQL.get('SELECT * from client;')
 
     return render_template('dpt-sales.html', title='Sales', user=user, list=list)
 
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
 
+    list=[]
 
-    list=MySQL.get('SELECT * from HR;')
+    if request.method=='GET':
+        list=MySQL.get('SELECT * from HR;')
         
 
     return render_template('dpt-hr.html', title='Human Resources', user=user, list=list)

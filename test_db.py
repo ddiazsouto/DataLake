@@ -71,8 +71,9 @@ class TestBase(TestCase):   # main function to create the app environment
 
     def tearDown(self): # after closing
 
-        db.session.remove()
         db.drop_all()
+        db.session.remove()
+        
 
 
 
@@ -98,7 +99,7 @@ class TestViews(TestBase):  # This test confirms that the page loads
         response = self.client.get(url_for('sales'))
         self.assertEqual(response.status_code, 200)
 
-    def test_sales(self):
+    def test_hr(self):
         response = self.client.get(url_for('HR'))
         self.assertEqual(response.status_code, 200)
         
@@ -116,4 +117,4 @@ class TestViews(TestBase):  # This test confirms that the page loads
          
 #             follow_redirects=True
 #         )
-        #self.assertIn(b'Dan',response.data)
+      

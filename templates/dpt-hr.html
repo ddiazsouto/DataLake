@@ -7,58 +7,63 @@
 
 <style>
 
+
     form{
-    width:420px;
-    height:270px;
-    background-color: #ffffff55;
-    border-radius:7px;    
-    text-align: right;
-    padding: 80px 80px;
+        width:420px;
+        height:270px;
+        background-color: #ffffff55;
+        border-radius:7px;    
+        text-align: right;
+        padding: 80px 80px;
+        position: relative;
+        top: -360px;
+        right: -80px;
        
     }
 
+
     .frame{
-
-
-    background-color: #ffffff55;
-    border-radius:7px;    
-    text-align: right;
-    padding: 15px 15px;
-    max-width: 500px;
+        background-color: #ffffff55;
+        border-radius:7px;    
+        text-align: center;
+        padding: 15px 15px;
+        max-width: 500px;
         
     }
 
-    td{
+
+    td, th, tr{
         background-color: #ffffff55;
         padding: 25px 35px;
         border-style: double;
         border-radius:10px;
         min-width: 100px;
+
     }
     
         
     .sidebary{
               
-              width: 10%;
-              position: static;
-              position: sticky;
-              display:inline-block;
-              top: 10;
-              background-color: #000000aa;
-              padding-top: 25px;
-              padding: 25px;
-              max-width: 110px;
+        width: 10%;
+        position: static;
+        position: sticky;
+        display:inline-block;
+        top: 10;
+        background-color: #000000aa;
+        padding-top: 25px;
+        padding: 25px;
+        max-width: 110px;
               
+    }
 
-            }
 
     .content {
         display:inline-block; 
-        position: static;
-
-        
-        
-    }
+        position: relative;
+        top: -360px;
+        right: -80px;
+            
+     }
 
 </style> 
 
@@ -69,24 +74,24 @@
 
     <p>
         <div class="dropdown">
-            <a href="HR"><button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;Main &ensp;&ensp;</button></a>
+            <a href="HR"><button class="dropbtn" style=border-radius:10px;>Main</button></a>
              </div>
             </p>
 
             <p>
             <div class="dropdown", style=border-radius:10px;>
-                <a href="new-employee"><button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;New Employee &ensp;&ensp;</button></a>
+                <a href="new-employee"><button class="dropbtn" style=border-radius:10px;>New Employee </button></a>
                     </div>
                     </p>
 
                     <p>
                     <div class="dropdown">
-                        <a href="expenses"> <button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;New Expense &ensp;&ensp;</button></a>
+                        <a href="expenses"> <button class="dropbtn" style=border-radius:10px;>New Expense </button></a>
                     </div>
 
                     <p>
                         <div class="dropdown", style=border-radius:10px;>
-                            <a href="login"><button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;Log out &ensp;&ensp;</button></a>
+                            <a href="login"><button class="dropbtn" style=border-radius:10px;>Log out </button></a>
                                 </div>
                                 </p>
 
@@ -97,28 +102,47 @@
 
 
 {% block menu %}
-<center> <h2>
-Welcome {{user.name()}}
-<!-- {{user.department()}} -->
-</h2>
+
+
+<center>
+
+<div class="content">
+<center>   <h2> Welcome {{user.name()}} </h2> </center>
 
 <table class="frame" >
-{%for element in list%}
-<td>
-{% for j in element %}
-{% if j != None %}
-{{j}}
-{% endif %}
-<br>
-{% endfor %}
-</td> 
 
-{% endfor %}
 
-&ensp;
+    {%for element in list%}
+    {% if list.index(element)%4==0 %}
+
+    <tr>
+
+        <th>
+        {% for j in element %}
+        {{j}}<br>
+        {% endfor %}
+        </th> 
+
+
+
+    {% else %}
+
+
+        <th>
+            {% for j in element %}
+            {{j}}<br>
+            {% endfor %}
+            </th> 
+            
+
+
+    {% endif %}
+    {% endfor %}
+
 </table> 
 
 
+</div>
 
 </center>
 

@@ -37,13 +37,13 @@ class MyAlchemy():
 
         attempt = DanSQL()
         
-        attempt.write('CREATE DATABASE testbase')
-        attempt.write('use testbase')
+        attempt.write('CREATE DATABASE IF NOT EXISTS testbase;')
+        attempt.write('use testbase;')
         
-        attempt.write('CREATE TABLE Test(column1 VARCHAR(10));')
+        attempt.write('CREATE TABLE IF NOT EXISTS Test(column1 VARCHAR(10));')
         attempt.write(f'INSERT INTO test(column1) values({str(value)});')   
         
-        var = attempt.get('SELECT * FROM test;')
+        var = attempt.get('SELECT * FROM testbase.test;')
 
         attempt.write('DROP DATABASE testbase;')
 
