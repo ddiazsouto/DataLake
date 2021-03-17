@@ -4,7 +4,6 @@
 
 {% block body %}
 
-This is HR
 
 <style>
 
@@ -25,6 +24,7 @@ This is HR
     border-radius:7px;    
     text-align: right;
     padding: 15px 15px;
+    max-width: 500px;
         
     }
 
@@ -33,24 +33,83 @@ This is HR
         padding: 25px 35px;
         border-style: double;
         border-radius:10px;
+        min-width: 100px;
     }
     
+        
+    .sidebary{
+              
+              width: 10%;
+              position: static;
+              position: sticky;
+              display:inline-block;
+              top: 10;
+              background-color: #000000aa;
+              padding-top: 25px;
+              padding: 25px;
+              max-width: 110px;
+              
+
+            }
+
+    .content {
+        display:inline-block; 
+        position: static;
+
+        
+        
+    }
 
 </style> 
 
 
 
-{% block menu %}
-<center>
-Hi {{user.name()}}
-dept = {{user.department()}}
 
-<table class="frame", style=width:400px; >
+<div class=sidebary style="display:inline-block;"> 
+
+    <p>
+        <div class="dropdown">
+            <a href="HR"><button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;Main &ensp;&ensp;</button></a>
+             </div>
+            </p>
+
+            <p>
+            <div class="dropdown", style=border-radius:10px;>
+                <a href="new-employee"><button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;New Employee &ensp;&ensp;</button></a>
+                    </div>
+                    </p>
+
+                    <p>
+                    <div class="dropdown">
+                        <a href="expenses"> <button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;New Expense &ensp;&ensp;</button></a>
+                    </div>
+
+                    <p>
+                        <div class="dropdown", style=border-radius:10px;>
+                            <a href="login"><button class="dropbtn" style=border-radius:10px;>&ensp;&ensp;Log out &ensp;&ensp;</button></a>
+                                </div>
+                                </p>
+
+                </p></div>
+
+
+
+
+
+{% block menu %}
+<center> <h2>
+Welcome {{user.name()}}
+<!-- {{user.department()}} -->
+</h2>
+
+<table class="frame" >
 {%for element in list%}
 <td>
 {% for j in element %}
-
+{% if j != None %}
 {{j}}
+{% endif %}
+<br>
 {% endfor %}
 </td> 
 
@@ -58,7 +117,7 @@ dept = {{user.department()}}
 
 &ensp;
 </table> 
-{{list}}
+
 
 
 </center>

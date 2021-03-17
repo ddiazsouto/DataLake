@@ -80,7 +80,7 @@ def login():
                 return render_template('dpt-sales.html', form=form, title='Sales', name=user.name(), department=user.department(), user=user)
 
             elif user.department() == 'HR':
-                return render_template('dpt-hr.html', form=form, title='HR', name=user.name(), department=user.department())
+                return render_template('dpt-hr.html', form=form, title='HR', name=user.name(), department=user.department(), user=user)
 
 
         else:
@@ -121,7 +121,7 @@ def client():
             msg='Please, fill in all required fields'
 
 
-    return render_template('client.html', title='New Client', message=msg,  form=grab_data)
+    return render_template('client.html', title='New Client', message=msg,  form=grab_data, user=user)
 
 
 
@@ -175,10 +175,15 @@ def sales():
 
     return render_template('dpt-sales.html', title='Sales', user=user, list=list)
 
-@app.route('/HR')
+@app.route('/HR', methods=['GET', 'POST'])
 def HR():
 
-    list=MySQL.get('SELECT * from HR;')
+    list=[]
+
+    if request.method in ['GET', 'POST']:
+
+        z=MySQL.get('SELECT * from HR;')
+        list=z
 
     return render_template('dpt-hr.html', title='Human Resources', user=user, list=list)
 
