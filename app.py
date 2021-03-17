@@ -1,5 +1,6 @@
 # External modules
 import pymysql
+from datetime import datetime
 from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm 
@@ -84,7 +85,7 @@ def login():
 
 
         else:
-            msg='Please, that is a wrong username'
+            msg='Please, wrong username or password'
 
     return render_template('login.html', title='Log-in', form=form, message=msg)
 
@@ -157,15 +158,35 @@ def nemployee():
 def expenses():
 
     grab_data = new_expense()
+    msg = ''
 
-    if request.method=='POST':
+    if request.method=='POST' and user.department() == 'HR':
+    
+        now = datetime.now()
+        
+        
+        date = str(now.strftime('%Y-%m-%d %H:%M:%S'))
+        amount = float(grab_data.amount.data)
+        details = str(grab_data.details.data)
+        manager = user.name()
 
-        nature = grab_data.nature.data
-        vendor = grab_data.vendor.data
-        reason = grab_data.reason.data
+
+        if amount*len(details) != 0:
+
+            MySQL.write(f"INSERT INTO HR(date, amount, details, manager) values ('{date}', {amount}, '{details}', '{manager}');")
+
+            grab_data.amount.data = 4.00
+            grab_data.details.data = 'Hey'
+            msg = 'New expense added'
+
+        else:
+            msg = 'Please fill in the fields with valid information'
 
 
-    return render_template('expenses.html', title='Expenses page', form=grab_data, user=user)        
+    return render_template('expenses.html', title='Expenses page', form=grab_data, user=user, message=msg)        
+
+
+
 
 
 @app.route('/sales')
@@ -178,12 +199,9 @@ def sales():
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
 
-    list=[]
 
-    if request.method in ['GET', 'POST']:
-
-        z=MySQL.get('SELECT * from HR;')
-        list=z
+    list=MySQL.get('SELECT * from HR;')
+        
 
     return render_template('dpt-hr.html', title='Human Resources', user=user, list=list)
 

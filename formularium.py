@@ -1,7 +1,5 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, SubmitField, IntegerField
-
-
+from wtforms import StringField, SubmitField, IntegerField, FloatField
 
 
 
@@ -33,9 +31,10 @@ class new_employee(FlaskForm):
 
 class new_expense(FlaskForm):
 
-    nature = StringField('Nature of the expense ')
-    vendor = StringField('Name of the vendor ')
-    reason = StringField('Reason of the expense')
+    date = StringField('Date ')
+    amount = FloatField('How much ')
+    details = StringField('Reason of the expense')
+    manager= StringField('Manager')
     add_expense = SubmitField('Add expense')
 
 

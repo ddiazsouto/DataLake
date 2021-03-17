@@ -1,4 +1,5 @@
 from app import db
+from datetime import datetime
 
 
 
@@ -42,9 +43,10 @@ class Expenses(db.Model):
 
 class HR(db.Model):
 
-    date = db.Column(db.DateTime, primary_key=True)
+    date = db.Column(db.DateTime, primary_key=True )
     expense_id = db.Column(db.Integer, db.ForeignKey('expenses.id'), nullable=True)
     amount = db.Column(db.Float, nullable=False)
+    manager = db.Column(db.String(20), nullable=False)
     details = db.Column(db.String(50), nullable=True)
 
 
