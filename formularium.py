@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, SubmitField, IntegerField, FloatField
-
+from wtforms import StringField, SubmitField, IntegerField, FloatField, SelectField
+from elementae import DanSQL
 
 
 
@@ -31,11 +31,24 @@ class new_employee(FlaskForm):
 
 class new_expense(FlaskForm):
 
+    
+    pairing=dict()
+    for i in DanSQL().get("select * from expenses;"):
+        nature=i[1]+'-'+i[2]
+        pairing[i[0]]=nature
+
+    many=[]
+    while (len(pairing)>0):
+        many.append(pairing.popitem())
+    
+
     date = StringField('Date ')
     amount = FloatField('How much ')
+    nature = SelectField('Nature of the expense', choices=many)
     details = StringField('Reason of the expense')
     manager= StringField('Manager')
     add_expense = SubmitField('Add expense')
+
 
 
 

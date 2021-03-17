@@ -7,6 +7,8 @@
 
 """
 
+from elementae import DanSQL
+
 class student:
     
     def __init__(self, name, age, class_):
@@ -78,4 +80,6 @@ class alumn(stud):
         super(alumn, self).__init__()
         
         self.name=name
-    
+
+
+

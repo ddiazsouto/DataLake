@@ -168,15 +168,16 @@ def expenses():
         date = str(now.strftime('%Y-%m-%d %H:%M:%S'))
         amount = float(grab_data.amount.data)
         details = str(grab_data.details.data)
+        expense_id = int(grab_data.nature.data)
         manager = user.name()
 
 
         if amount*len(details) != 0:
 
-            MySQL.write(f"INSERT INTO HR(date, amount, details, manager) values ('{date}', {amount}, '{details}', '{manager}');")
+            MySQL.write(f"INSERT INTO HR(date, expense_id, amount, details, manager) values ('{date}', {expense_id}, {amount}, '{details}', '{manager}');")
 
-            grab_data.amount.data = 4.00
-            grab_data.details.data = 'Hey'
+            grab_data.amount.data = 0.0
+            grab_data.details.data = ''
             msg = 'New expense added'
 
         else:
