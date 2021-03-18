@@ -94,3 +94,20 @@ class deleting(FlaskForm):
     action = SelectField('Action ', choices=[(1, 'View'), (2, 'Delete')])
     selection = SelectField('select ', choices = many)
     confirm = SubmitField('Confirm')
+
+
+class deletings(FlaskForm):
+
+    many=[]
+    pairing=dict()
+
+    for i in DanSQL().get("SELECT date, amount FROM sales;"):
+        fname='£'+str(i[1])+' | '+str(i[0])
+        pairing[i[0]]=fname
+    
+    while (len(pairing)>0):
+        many.append(pairing.popitem())
+
+    action = SelectField('Action ', choices=[(1, 'View'), (2, 'Delete')])
+    selection = SelectField('select ', choices = many)
+    confirm = SubmitField('Confirm')

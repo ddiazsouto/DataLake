@@ -8,7 +8,7 @@ from wtforms import StringField, SubmitField, IntegerField
 # Those were the external modules 
 
 # Internal modules:
-from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting
+from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings
 from elementae import Usuarium, DanSQL
 
 # Those were the internal modules
@@ -262,7 +262,7 @@ def MasterHR():
     list=[]
 
     if request.method=='GET':
-        list=MySQL.get('SELECT * from sales;')
+        list=MySQL.get('SELECT * from HR;')
     
     if request.method == 'POST':
 
@@ -282,6 +282,39 @@ def MasterHR():
 
 
     return render_template('masterhr.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
+
+
+
+
+@app.route('/master-sales', methods=['GET', 'POST'])
+def Mastersales():
+
+    grab_data = deletings()
+    msg='Dan'
+    list=[]
+
+    if request.method=='GET':
+        list=MySQL.get('SELECT * from sales;')
+    
+    if request.method == 'POST':
+
+        action = grab_data.action.data
+        selection = grab_data.selection.data
+
+        msg=''
+
+        if int(action) == 1:
+            list=MySQL.get(f"SELECT * from sales WHERE date='{selection}';")   
+            msg =f'Not Dan, POST{action}, {selection}'    
+            return render_template('mastersales.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
+
+        elif int(action) == 2:
+            MySQL.write(f"DELETE from sales WHERE date='{selection}';")
+            msg = f'Not Dan, POST{action}, {selection}' 
+
+
+    return render_template('mastersales.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
+
 
 
 
