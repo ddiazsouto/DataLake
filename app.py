@@ -8,7 +8,7 @@ from wtforms import StringField, SubmitField, IntegerField
 # Those were the external modules 
 
 # Internal modules:
-from formularium import verifyU, new_client, new_employee, new_expense
+from formularium import verifyU, new_client, new_employee, new_expense, deales
 from elementae import Usuarium, DanSQL
 
 # Those were the internal modules
@@ -50,6 +50,8 @@ Now some logic for the app and its routes
 user = Usuarium()                         # We create an object to control the user login
 
 MySQL=DanSQL()
+
+now = datetime.now()
 
 
 
@@ -160,10 +162,7 @@ def expenses():
     grab_data = new_expense()
     msg = ''
 
-    if request.method=='POST' and user.department() == 'HR':
-    
-        now = datetime.now()
-        
+    if request.method=='POST' and user.department() == 'HR':   
         
         date = str(now.strftime('%Y-%m-%d %H:%M:%S'))
         amount = float(grab_data.amount.data)
@@ -190,9 +189,25 @@ def expenses():
 
 @app.route('/deals', methods=['GET', 'POST'])
 def deals():
-      
 
-    return render_template('deals.html', title='Human Resources', user=user)
+
+    grab_data=deales() 
+    msg=''
+
+    if request.method=='POST':
+
+        amount      = float(grab_data.amount.data)
+        client_id   = int(grab_data.client_id.data)
+        employee_id = int(grab_data.employee_id.data)
+                
+        MySQL.write(f"insert into sales(date, client_id, employee_id, amount) values(now(), {client_id}, {employee_id}, {amount});")
+        grab_data.amount.data =  ''
+        msg = 'Deal added'
+
+
+                     
+
+    return render_template('deals.html', title='Deals', user=user, form=grab_data, message=msg)
 
 
 
@@ -201,10 +216,13 @@ def sales():
 
     list=[]
 
-    if request.method=='GET':
+    if request.method=='POST':
         list=MySQL.get('SELECT * from client;')
 
     return render_template('dpt-sales.html', title='Sales', user=user, list=list)
+
+
+
 
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
