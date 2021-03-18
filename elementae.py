@@ -1,4 +1,4 @@
-usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR'}
+usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR', 'SupremeOverlord':'Master', 'cunt':'Sales'}
 import pymysql
 
 class Usuarium():

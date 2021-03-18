@@ -42,7 +42,7 @@ class new_expense(FlaskForm):
     while (len(pairing)>0):
         many.append(pairing.popitem())
     
-    print(many)
+
     date = StringField('Date ')
     amount = FloatField('How much ')
     nature = SelectField('Nature of the expense', choices=many)
@@ -70,9 +70,8 @@ class deales(FlaskForm):
 
     while (len(pairing2)>0):
         many[1].append(pairing2.popitem())
-
-    print(many[0], '\n', many[1])
-
+                                                # Yes it is redundant and could be improved
+                                                #  But I'd rather focus on what is important before
     amount = StringField('Deal worth')
     client_id = SelectField('Who was the deal with ', choices=many[0])
     employee_id = SelectField('Deal closed by ', choices=many[1])
@@ -80,3 +79,18 @@ class deales(FlaskForm):
     close_deal = SubmitField('Close deal')
 
 
+class deleting(FlaskForm):
+
+    many=[]
+    pairing=dict()
+
+    for i in DanSQL().get("SELECT date, amount, manager, details FROM HR;"):
+        fname='£'+str(i[1])+' '+i[2]
+        pairing[i[0]]=fname
+    
+    while (len(pairing)>0):
+        many.append(pairing.popitem())
+
+    action = SelectField('Action ', choices=[(1, 'View'), (2, 'Delete')])
+    selection = SelectField('select ', choices = many)
+    confirm = SubmitField('Confirm')

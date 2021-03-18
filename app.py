@@ -8,7 +8,7 @@ from wtforms import StringField, SubmitField, IntegerField
 # Those were the external modules 
 
 # Internal modules:
-from formularium import verifyU, new_client, new_employee, new_expense, deales
+from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting
 from elementae import Usuarium, DanSQL
 
 # Those were the internal modules
@@ -85,6 +85,8 @@ def login():
             elif user.department() == 'HR':
                 return render_template('dpt-hr.html', form=form, title='HR', name=user.name(), department=user.department(), user=user)
 
+            elif user.department() == 'Master':
+                return render_template('master.html', form=form, title='Master', name=user.name(), department=user.department(), user=user)
 
         else:
             msg='Please, wrong username or password'
@@ -216,7 +218,7 @@ def sales():
 
     list=[]
 
-    if request.method=='POST':
+    if request.method=='GET':
         list=MySQL.get('SELECT * from client;')
 
     return render_template('dpt-sales.html', title='Sales', user=user, list=list)
@@ -234,6 +236,53 @@ def HR():
         
 
     return render_template('dpt-hr.html', title='Human Resources', user=user, list=list)
+
+
+
+
+
+@app.route('/Over', methods=['GET', 'POST'])
+def Master():
+
+    list=[]
+
+        #    Missing some logic here
+
+    return render_template('master.html', title='Master', user=user, list=list)
+
+
+
+
+
+@app.route('/master-HR', methods=['GET', 'POST'])
+def MasterHR():
+
+    grab_data = deleting()
+    msg='Dan'
+    list=[]
+
+    if request.method=='GET':
+        list=MySQL.get('SELECT * from sales;')
+    
+    if request.method == 'POST':
+
+        action = grab_data.action.data
+        selection = grab_data.selection.data
+
+        msg=f'Not Dan, POST{action}, {selection}'
+
+        if int(action) == 1:
+            list=MySQL.get(f"SELECT * from HR WHERE date='{selection}';")   
+            msg = 'This is what you selected'     
+            return render_template('masterhr.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
+
+        elif int(action) == 2:
+            MySQL.write(f"DELETE from HR WHERE date='{selection}';")
+            msg = 'Entry deleted' 
+
+
+    return render_template('masterhr.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
+
 
 
 """     Here the app runs       and lives       not to touch        leave alone     logic above
