@@ -244,11 +244,9 @@ def HR():
 @app.route('/Over', methods=['GET', 'POST'])
 def Master():
 
-    list=[]
-
         #    Missing some logic here
 
-    return render_template('master.html', title='Master', user=user, list=list)
+    return render_template('master.html', title='Master', user=user)
 
 
 
