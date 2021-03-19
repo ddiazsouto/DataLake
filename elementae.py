@@ -37,7 +37,8 @@ class DanSQL():
 
     def __init__(self):
 
-        self.Make = pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
+        #self.Make = pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
+        self.Make = pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')
         self.MySQL = self.Make.cursor()
 
     def sudo(self):
