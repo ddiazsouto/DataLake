@@ -1,4 +1,4 @@
-usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR', 'SupremeOverlord':'Master', 'cunt':'Sales'}
+usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR'}
 import pymysql
 
 class Usuarium():
@@ -49,12 +49,18 @@ class DanSQL():
         self.MySQL.execute(str)
         self.sudo()
 
-    def get(self, str):
+    def injects(self, str):
 
         init=DanSQL()
 
         init.MySQL.execute(str)
-        return init.MySQL.fetchall()
+        init.sudo()
+        init.off()
+
+    def get(self, str):
+
+        self.MySQL.execute(str)
+        return self.MySQL.fetchall()
 
     def off(self):
        

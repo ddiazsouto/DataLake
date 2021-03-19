@@ -37,7 +37,7 @@ class MyAlchemy():
 
         attempt = DanSQL()
         
-        attempt.write('CREATE DATABASE IF NOT EXISTS testbase;')
+        DanSQL().write('CREATE DATABASE IF NOT EXISTS testbase;')
         attempt.write('use testbase;')
         
         attempt.write('CREATE TABLE IF NOT EXISTS Test(column1 VARCHAR(10));')

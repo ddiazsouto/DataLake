@@ -83,3 +83,25 @@ class alumn(stud):
 
 
 
+def processc(grab_data):
+
+        company_name = grab_data.company_name.data        #   Assigning value
+        contact_name = grab_data.contact_name.data        #   to the variables    
+        contact_surname = grab_data.contact_surname.data  #   internally
+        phone = grab_data.phone.data                      #   so we can 
+        details= grab_data.details.data                   #   manipulate them
+                                                        # with posterior logic
+        
+        if len(contact_name)*len(company_name)*len(phone) != 0:
+
+            DanSQL().injects(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
+            
+            grab_data.company_name.data = grab_data.contact_name.data = grab_data.contact_surname.data = ''
+            grab_data.phone.data = grab_data.details.data = ''
+
+            msg = 'New client added'
+
+        else:
+            msg='Please, fill in all required fields'
+        
+        return grab_data, msg

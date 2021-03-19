@@ -10,6 +10,7 @@ from wtforms import StringField, SubmitField, IntegerField
 # Internal modules:
 from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection
 from elementae import Usuarium, DanSQL
+from AppLogic import processc
 
 # Those were the internal modules
 
@@ -107,25 +108,8 @@ def client():
 
     if request.method=='POST':
 
-        
-        company_name = grab_data.company_name.data        #   Assigning value
-        contact_name = grab_data.contact_name.data        #   to the variables    
-        contact_surname = grab_data.contact_surname.data  #   internally
-        phone = grab_data.phone.data                      #   so we can 
-        details= grab_data.details.data                   #   manipulate them
-                                                        # with posterior logic
-        
-        if len(contact_name)*len(company_name)*len(phone) != 0:
+        grab_data, msg = processc(grab_data) 
 
-            MySQL.write(f"INSERT INTO client(company_name, contact_name, contact_surname, phone, details) VALUES('{company_name}','{contact_name}','{contact_surname}','{phone}','{details}');")
-            
-            grab_data.company_name.data = grab_data.contact_name.data = grab_data.contact_surname.data = ''
-            grab_data.phone.data = grab_data.details.data = ''
-
-            msg = 'New client added'
-
-        else:
-            msg='Please, fill in all required fields'
 
 
     return render_template('client.html', title='New Client', message=msg, form1=grab, form=grab_data, user=user)
