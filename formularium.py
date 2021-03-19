@@ -116,6 +116,27 @@ class deletings(FlaskForm):
 
 class selection(FlaskForm):
 
-    resp = StringField('Response ')
+
     selection = SelectField('select ', choices=[('U', 'Update'), ('N', 'New Entry')])
-    pressa = SubmitField('Add employee')
+    pressa = SubmitField('Confirm')
+
+
+class updating(FlaskForm):
+
+    many=[]
+    pairing=dict()
+
+
+    for i in DanSQL().get("SELECT company_name, contact_name, id FROM client;"):
+        fname=str(i[0])+' | '+str(i[1])
+        pairing[i[2]]=fname
+    
+    while (len(pairing)>0):
+        many.append(pairing.popitem())
+
+    listing=[('company_name', 'Company'), ('contact_name', 'Contact'), ('contact_surname', 'Surname'), ('phone', 'Phone'), ('details', 'Details')]
+
+    edit = StringField('Edit ')
+    select = SelectField('What Client ', choices=many)
+    narrow= SelectField('What field', choices=listing)
+    press = SubmitField('Confirm')

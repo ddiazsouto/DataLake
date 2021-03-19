@@ -59,8 +59,10 @@ class DanSQL():
 
     def get(self, str):
 
-        self.MySQL.execute(str)
-        return self.MySQL.fetchall()
+        init=DanSQL()
+
+        init.MySQL.execute(str)
+        return init.MySQL.fetchall()
 
     def off(self):
        

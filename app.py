@@ -8,9 +8,10 @@ from wtforms import StringField, SubmitField, IntegerField
 # Those were the external modules 
 
 # Internal modules:
-from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection
+from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection, updating
+
 from elementae import Usuarium, DanSQL
-from AppLogic import processc
+from AppLogic import process_client, navigating_client
 
 # Those were the internal modules
 
@@ -81,13 +82,13 @@ def login():
 
 
             if user.department() == 'Sales':
-                return render_template('dpt-sales.html', form=form, title='Sales', name=user.name(), department=user.department(), user=user)
+                return render_template('dpt-sales.html', form=form, title='Sales', user=user)
 
             elif user.department() == 'HR':
-                return render_template('dpt-hr.html', form=form, title='HR', name=user.name(), department=user.department(), user=user)
+                return render_template('dpt-hr.html', form=form, title='HR', user=user)
 
             elif user.department() == 'Master':
-                return render_template('master.html', form=form, title='Master', name=user.name(), department=user.department(), user=user)
+                return render_template('master.html', form=form, title='Master', user=user)
 
         else:
             msg='Please, wrong username or password'
@@ -103,16 +104,19 @@ def client():
 
     grab_data = new_client()
     grab = selection()
+    editing=updating()
     msg=''
     
 
     if request.method=='POST':
 
-        grab_data, msg = processc(grab_data) 
+
+        grab_data, msg = process_client(grab_data) 
+        
+        editing, msg = navigating_client(editing)
 
 
-
-    return render_template('client.html', title='New Client', message=msg, form1=grab, form=grab_data, user=user)
+    return render_template('client.html', form3=editing, message=msg, form1=grab, form=grab_data, user=user)
 
 
 
