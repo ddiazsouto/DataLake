@@ -11,7 +11,7 @@ from wtforms import StringField, SubmitField, IntegerField
 from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection, updating
 
 from elementae import Usuarium, DanSQL
-from AppLogic import process_client, navigating_client, doublecheck
+from AppLogic import process_client, navigating_client, doublecheck, employee_logic, fexpenses, dealfunct
 
 # Those were the internal modules
 
@@ -76,10 +76,8 @@ def login():
     msg=''
 
     if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
-
-        template = doublecheck(user)  
-
-
+        template = doublecheck(user)                         #   Confirms the user and directs us
+#                                                                  to the right template
     elif request.method=='POST':
             msg='Please, wrong username or password'
 
@@ -115,26 +113,11 @@ def nemployee():
     grab_data = new_employee()
     msg =''
 
-
-    if request.method=='POST':
-        
-        emp_name = grab_data.emp_name.data
-        emp_surname= grab_data.emp_surname.data
-        role = grab_data.role.data
-        team = grab_data.team.data
-        department= user.department()   #   Department defined automatically
-        
-        if len(emp_name)*len(emp_surname)*len(role)*len(team) != 0 :
-
-            MySQL.write(f"INSERT INTO employee(name, surname, position, team, department) VALUES('{emp_name}','{emp_surname}','{role}','{team}','{department}');")
-            grab_data.emp_name.data = grab_data.emp_surname.data = grab_data.role.data = grab_data.team.data = ''
-
-            msg = 'new employee added'
-            
-        else:
-            msg = 'Please fill in the required fields'
+    if request.method=='POST':        
+        grab_data, mmsg = employee_logic(grab_data, user)
 
     return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
+
 
 
 @app.route('/expenses', methods=['GET', 'POST'])
@@ -144,24 +127,9 @@ def expenses():
     msg = ''
 
     if request.method=='POST' and user.department() == 'HR':   
-        
-        date = str(now.strftime('%Y-%m-%d %H:%M:%S'))
-        amount = float(grab_data.amount.data)
-        details = str(grab_data.details.data)
-        expense_id = int(grab_data.nature.data)
-        manager = user.name()
 
+        grab_data, msg = fexpenses(grab_data, user)    
 
-        if amount*len(details) != 0:
-
-            MySQL.write(f"INSERT INTO HR(date, expense_id, amount, details, manager) values (now(), {expense_id}, {amount}, '{details}', '{manager}');")
-
-            grab_data.amount.data = 0.0
-            grab_data.details.data = ''
-            msg = 'New expense added'
-
-        else:
-            msg = 'Please fill in the fields with valid information'
 
 
     return render_template('expenses.html', title='Expenses page', form=grab_data, user=user, message=msg)        
@@ -171,24 +139,14 @@ def expenses():
 @app.route('/deals', methods=['GET', 'POST'])
 def deals():
 
-
     grab_data=deales() 
     msg=''
 
     if request.method=='POST':
-
-        amount      = float(grab_data.amount.data)
-        client_id   = int(grab_data.client_id.data)
-        employee_id = int(grab_data.employee_id.data)
-                
-        MySQL.write(f"insert into sales(date, client_id, employee_id, amount) values(now(), {client_id}, {employee_id}, {amount});")
-        grab_data.amount.data =  ''
-        msg = 'Deal added'
-
-
-                     
+        grab_data, msg = dealfunct(grab_data)                     
 
     return render_template('deals.html', title='Deals', user=user, form=grab_data, message=msg)
+
 
 
 

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm 
 from wtforms import StringField, SubmitField, IntegerField, FloatField, SelectField
-from elementae import DanSQL
+from elementae import DanSQL, ListForm
 
 
 
@@ -53,28 +53,10 @@ class new_expense(FlaskForm):
 
 class deales(FlaskForm):
 
-    many=[[], []]
-    pairing1=dict()
-    pairing2=dict()
 
-    for i in DanSQL().get("SELECT company_name, id FROM client;"):
-        nature=i[1]
-        pairing1[nature]=i[0]
-
-    for i in DanSQL().get("SELECT name, surname, id FROM employee;"):
-        fname=i[0]+' '+i[1]
-        pairing2[i[2]]=fname
-    
-    while (len(pairing1)>0):
-        many[0].append(pairing1.popitem())
-
-    while (len(pairing2)>0):
-        many[1].append(pairing2.popitem())
-                                                # Yes it is redundant and could be improved
-                                                #  But I'd rather focus on what is important before
     amount = StringField('Deal worth')
-    client_id = SelectField('Who was the deal with ', choices=many[0])
-    employee_id = SelectField('Deal closed by ', choices=many[1])
+    client_id = SelectField('Who was the deal with ', choices=ListForm("SELECT company_name, id FROM client;", 'client'))
+    employee_id = SelectField('Deal closed by ', choices=ListForm("SELECT name, surname, id FROM employee;", 'employee'))
     date = StringField('Date ')
     close_deal = SubmitField('Close deal')
 

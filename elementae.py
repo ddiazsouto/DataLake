@@ -70,3 +70,25 @@ class DanSQL():
         self.MySQL.close()
 
 
+def ListForm(stringin, dabase):
+
+    many=[]
+    pairing=dict()
+
+    if dabase == 'employee':
+
+        for i in DanSQL().get(stringin):
+            fname=i[0]+' '+i[1]
+            pairing[i[2]]=fname
+
+    if dabase == 'client':
+
+        for i in DanSQL().get(stringin):
+            nature=i[1]
+            pairing[nature]=i[0]
+
+        
+    while (len(pairing)>0):
+        many.append(pairing.popitem())
+
+    return many
