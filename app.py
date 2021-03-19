@@ -8,7 +8,7 @@ from wtforms import StringField, SubmitField, IntegerField
 # Those were the external modules 
 
 # Internal modules:
-from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings
+from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection
 from elementae import Usuarium, DanSQL
 
 # Those were the internal modules
@@ -101,7 +101,9 @@ def login():
 def client():
 
     grab_data = new_client()
+    grab = selection()
     msg=''
+    
 
     if request.method=='POST':
 
@@ -126,7 +128,7 @@ def client():
             msg='Please, fill in all required fields'
 
 
-    return render_template('client.html', title='New Client', message=msg,  form=grab_data, user=user)
+    return render_template('client.html', title='New Client', message=msg, form1=grab, form=grab_data, user=user)
 
 
 

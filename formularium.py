@@ -111,3 +111,11 @@ class deletings(FlaskForm):
     action = SelectField('Action ', choices=[(1, 'View'), (2, 'Delete')])
     selection = SelectField('select ', choices = many)
     confirm = SubmitField('Confirm')
+
+
+
+class selection(FlaskForm):
+
+    resp = StringField('Response ')
+    selection = SelectField('select ', choices=[('U', 'Update'), ('N', 'New Entry')])
+    pressa = SubmitField('Add employee')

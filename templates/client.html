@@ -7,25 +7,38 @@
 {% block menu %}
 
 <center>
+
+
+
+
+        <form method='POST', action='', style="padding: 1px 1px 1px 1px; max-height: 150px; text-align: center;">
+            <p>
+                <br><br> {{form1.hidden_tag()}}
+            What do you want to do<br>
+            {{form1.selection}}<br><br>
+            {{form1.pressa}}
+            </p>         <p><h4>{{message}}</h4></p>
+        </form>
+ 
+
+
+
 <div class=form>
     <form method='POST', action=''>
         <p>
-            <br><br>
-        {{form.hidden_tag()}}
+            <br><br> {{form.hidden_tag()}}
         {{form.company_name.label}}{{form.company_name}}<br>
         {{form.contact_name.label}}{{form.contact_name}}<br>
         {{form.contact_surname.label}}{{form.contact_surname}}<br>
         {{form.phone.label}}{{form.phone}}<br>
         {{form.details.label}}{{form.details}}<br><br>
         {{form.add_client}}
-        </p> 
-        <p><h4>{{message}}</h4></p>
-
-
+        </p>         <p><h4>{{message}}</h4></p>
     </form>
-
 </div>
    
+
+
 </center>
 
 {% endblock menu %}
