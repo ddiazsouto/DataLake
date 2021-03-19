@@ -308,7 +308,7 @@ def Mastersales():
 
         elif int(action) == 2:
             MySQL.write(f"DELETE from sales WHERE date='{selection}';")
-            msg = f'Not Dan, POST{action}, {selection}' 
+            msg = 'Enty deleted successfully' 
 
 
     return render_template('mastersales.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
