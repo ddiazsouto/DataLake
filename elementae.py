@@ -70,25 +70,32 @@ class DanSQL():
         self.MySQL.close()
 
 
-def ListForm(stringin, dabase):
+class ListForm():
 
-    many=[]
-    pairing=dict()
+    def __init__(self):
 
-    if dabase == 'employee':
+        self.many=[]
+        self.pairing=dict()
+
+    def employee(self, stringin):
 
         for i in DanSQL().get(stringin):
             fname=i[0]+' '+i[1]
-            pairing[i[2]]=fname
+            self.pairing[i[2]]=fname
+                
+        while (len(self.pairing)>0):
+            self.many.append(self.pairing.popitem())
 
-    if dabase == 'client':
+        return self.many
+
+
+    def client(self, stringin):
 
         for i in DanSQL().get(stringin):
             nature=i[1]
-            pairing[nature]=i[0]
-
+            self.pairing[nature]=i[0]
         
-    while (len(pairing)>0):
-        many.append(pairing.popitem())
+        while (len(self.pairing)>0):
+            self.many.append(self.pairing.popitem())
 
-    return many
+        return self.many

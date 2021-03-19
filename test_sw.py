@@ -23,7 +23,6 @@ class Testuser():
 
 class MyAlchemy():
 
-
     def connects():
 
         try:

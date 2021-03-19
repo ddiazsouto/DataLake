@@ -55,8 +55,8 @@ class deales(FlaskForm):
 
 
     amount = StringField('Deal worth')
-    client_id = SelectField('Who was the deal with ', choices=ListForm("SELECT company_name, id FROM client;", 'client'))
-    employee_id = SelectField('Deal closed by ', choices=ListForm("SELECT name, surname, id FROM employee;", 'employee'))
+    client_id = SelectField('Who was the deal with ', choices=ListForm().client("SELECT company_name, id FROM client;"))
+    employee_id = SelectField('Deal closed by ', choices=ListForm().employee("SELECT name, surname, id FROM employee;"))
     date = StringField('Date ')
     close_deal = SubmitField('Close deal')
 
