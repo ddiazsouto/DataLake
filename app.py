@@ -101,9 +101,7 @@ def client():
 
     if request.method=='POST':
 
-
-        grab_data, msg = process_client(grab_data) 
-        
+        grab_data, msg = process_client(grab_data)         
         editing, msg = navigating_client(editing)
 
 
@@ -156,7 +154,7 @@ def expenses():
 
         if amount*len(details) != 0:
 
-            MySQL.write(f"INSERT INTO HR(date, expense_id, amount, details, manager) values ('{date}', {expense_id}, {amount}, '{details}', '{manager}');")
+            MySQL.write(f"INSERT INTO HR(date, expense_id, amount, details, manager) values (now(), {expense_id}, {amount}, '{details}', '{manager}');")
 
             grab_data.amount.data = 0.0
             grab_data.details.data = ''

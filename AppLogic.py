@@ -127,18 +127,14 @@ def doublecheck(user):
     takeme_to=''
 
     if user.department() == 'Sales':
-
         takeme_to = 'dpt-sales.html'
-        #return render_template(, form=form, title='Sales', user=user)
 
     elif user.department() == 'HR':
-
         takeme_to = 'dpt-hr.html'
-        #return render_template('dpt-hr.html', form=form, title='HR', user=user)
+        
 
     elif user.department() == 'Master':
-
         takeme_to = 'master.html'
-        #return render_template('master.html', form=form, title='Master', user=user)
+       
 
     return str(takeme_to)
