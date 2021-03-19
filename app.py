@@ -11,7 +11,7 @@ from wtforms import StringField, SubmitField, IntegerField
 from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection, updating
 
 from elementae import Usuarium, DanSQL
-from AppLogic import process_client, navigating_client
+from AppLogic import process_client, navigating_client, doublecheck
 
 # Those were the internal modules
 
@@ -70,30 +70,21 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-
+    template='login.html'
 
     form = verifyU()
     msg=''
 
-    if request.method=='POST':
+    if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
 
-        
-        if user.check(form.login.data, form.passwd.data ) == True:
+        template = doublecheck(user)  
 
 
-            if user.department() == 'Sales':
-                return render_template('dpt-sales.html', form=form, title='Sales', user=user)
-
-            elif user.department() == 'HR':
-                return render_template('dpt-hr.html', form=form, title='HR', user=user)
-
-            elif user.department() == 'Master':
-                return render_template('master.html', form=form, title='Master', user=user)
-
-        else:
+    elif request.method=='POST':
             msg='Please, wrong username or password'
 
-    return render_template('login.html', title='Log-in', form=form, message=msg)
+
+    return render_template(template, title='Log-in', form=form, message=msg, user=user)
 
 
 
