@@ -11,6 +11,7 @@ wtforms
 pytest-cov
 sqlalchemy
 flask_testing
+gunicorn
 
 
 
