@@ -26,7 +26,7 @@ class Usuarium():
     def name(self):
         try:
             return self.nm[0]
-        except: return None
+        except: return 'Exception here' + str(self.nm[0])
             
 
     def department(self):
