@@ -260,7 +260,7 @@ def Mastersales():
         action = grab_data.action.data
         selection = grab_data.selection.data
 
-        msg=''
+        msg =f'Not Dan, POST{action}, {selection}'    
 
         if int(action) == 1:
             list=MySQL.get(f"SELECT * from sales WHERE date='{selection}';")   
