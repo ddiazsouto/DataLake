@@ -40,7 +40,6 @@ db=SQLAlchemy(app)
 Now some logic for the app and its routes
 
 """
-buffer = dict()
 
 
 user = Usuarium()                         # We create an object to control the user login
@@ -70,14 +69,25 @@ def login():
     msg=''
 
     if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
-
-        buffer['n']=user.name()
-        buffer['d']=user.department()
-
         template = identitydirect(user)                         #   Confirms the user and directs us
 #                                                                  to the right template
     elif request.method=='POST':
             msg='Please, wrong username or password'
+
+
+    @app.route('/new-employee')#, methods=['GET', 'POST'])
+    def nemployee():
+
+        grab_data = new_employee()
+        msg =''
+
+        if request.method=='POST':        
+            grab_data, mmsg = employee_logic(grab_data, user)
+
+        return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
+
+
+
 
 
     return render_template(template, title='Log-in', form=form, message=msg, user=user)
@@ -105,32 +115,22 @@ def client():
 
 
 
-@app.route('/new-employee', methods=['GET', 'POST'])
-def nemployee():
+# @app.route('/new-employee', methods=['GET', 'POST'])
+# def nemployee():
 
-    grab_data = new_employee()
-    msg =''
+#     grab_data = new_employee()
+#     msg =''
 
-    user=Usuarium()
-    user.nm.append(buffer['n'])
-    user.dpt.append(buffer['d'])
+#     if request.method=='POST':        
+#         grab_data, mmsg = employee_logic(grab_data, user)
 
- 
-    if request.method=='POST':        
-        grab_data, mmsg = employee_logic(grab_data, user)
-
-    return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
+#     return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
 
 
 
 @app.route('/expenses', methods=['GET', 'POST'])
 def expenses():
 
-    user=Usuarium()
-    user.nm.append(buffer['n'])
-    user.dpt.append(buffer['d'])
-
-  
     grab_data = new_expense()
     msg = ''
 
@@ -173,8 +173,7 @@ def sales():
 
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
-
-
+    
     list=[]
 
     if request.method=='GET':
