@@ -39,8 +39,8 @@ class MyAlchemy():
         attempt.write('CREATE DATABASE IF NOT EXISTS testbase;')
         attempt.write('use testbase;')        
         attempt.write('CREATE TABLE IF NOT EXISTS Test(column1 VARCHAR(10));')
-        attempt.write(f'INSERT INTO test(column1) values({str(value)});')        
-        var = attempt.get('SELECT * FROM testbase.test;')
+        attempt.write(f'INSERT INTO Test(column1) values({str(value)});')        
+        var = attempt.get('SELECT * FROM testbase.Test;')
         attempt.write('DROP DATABASE testbase;')
 
         return str(var)    
