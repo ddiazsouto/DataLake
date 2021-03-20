@@ -44,7 +44,7 @@ Now some logic for the app and its routes
 
 user = Usuarium()                         # We create an object to control the user login
 
-MySQL=DanSQL()
+
 
 now = datetime.now()
 
@@ -233,7 +233,8 @@ def MasterHR():
             return render_template('masterhr.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
 
         elif int(action) == 2:
-            MySQL.write(f"DELETE from HR WHERE date='{selection}';")
+            
+            DanSQL().write(f"DELETE from HR WHERE date='{selection}';")
             msg = 'Entry deleted' 
 
 
@@ -268,7 +269,7 @@ def Mastersales():
             return render_template('mastersales.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
 
         elif int(action) == 2:
-            MySQL.write(f"DELETE from sales WHERE date='{selection}';")
+            DanSQL().write(f"DELETE from sales WHERE date='{selection}';")
             msg = 'Enty deleted successfully' 
 
 
@@ -284,4 +285,4 @@ def Mastersales():
 if __name__=='__main__':
     app.run(debug=True)
 
-MySQL.off()
+DanSQL.off()
