@@ -14,6 +14,9 @@ class Usuarium():
 
         if login in usuarios and passwd == clave:
 
+            self.nm=[]
+            self.dpt = []
+
             department = usuarios[login]
             self.nm.append(login)
             self.dpt.append(department)
@@ -22,13 +25,13 @@ class Usuarium():
 
     def name(self):
         try:
-            return self.nm[len(self.nm)-1]
+            return self.nm[0]
         except: return None
             
 
     def department(self):
         try:
-            return self.dpt[len(self.dpt)-1]
+            return self.dpt[0]
         except: return None
             
 

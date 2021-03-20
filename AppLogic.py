@@ -122,7 +122,8 @@ def navigating_client(editing):
         return editing, msg
 
 
-def doublecheck(user):
+def identitydirect(user):
+
 
     takeme_to=''
 

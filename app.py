@@ -11,7 +11,7 @@ from wtforms import StringField, SubmitField, IntegerField
 from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection, updating
 
 from elementae import Usuarium, DanSQL
-from AppLogic import process_client, navigating_client, doublecheck, employee_logic, fexpenses, dealfunct
+from AppLogic import process_client, navigating_client, identitydirect, employee_logic, fexpenses, dealfunct
 
 # Those were the internal modules
 
@@ -35,13 +35,6 @@ app.config['SECRET_KEY']='dAnIel52'
 db=SQLAlchemy(app)
 
 
-
-# Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')    <<<----  Use this for presentation, this one goes to the cloud
-# Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
-# MySQL=Make.cursor()
-# #                        I need to make this into an object
-# def sudo():
-#     Make.commit()
 
 """
 Now some logic for the app and its routes
@@ -76,7 +69,7 @@ def login():
     msg=''
 
     if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
-        template = doublecheck(user)                         #   Confirms the user and directs us
+        template = identitydirect(user)                         #   Confirms the user and directs us
 #                                                                  to the right template
     elif request.method=='POST':
             msg='Please, wrong username or password'
