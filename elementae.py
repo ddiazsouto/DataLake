@@ -28,7 +28,7 @@ class Usuarium():
         try:
             return self.nm[0]
         except Exception as e:
-            out = str(e) 
+            out = str(e) + str(len(self.nm)) 
             return out
             
 
