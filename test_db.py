@@ -3,7 +3,7 @@ import pymysql
 from flask_testing import TestCase
 from flask import url_for
 
-from app import app, db
+from core import app, db
 from tables import Expenses, Sales, Employee, HR, Client
 
 
