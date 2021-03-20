@@ -40,6 +40,7 @@ db=SQLAlchemy(app)
 Now some logic for the app and its routes
 
 """
+buffer = dict()
 
 
 user = Usuarium()                         # We create an object to control the user login
@@ -69,6 +70,10 @@ def login():
     msg=''
 
     if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
+
+        buffer['n']=user.name()
+        buffer['d']=user.department()
+
         template = identitydirect(user)                         #   Confirms the user and directs us
 #                                                                  to the right template
     elif request.method=='POST':
@@ -106,8 +111,11 @@ def nemployee():
     grab_data = new_employee()
     msg =''
 
-    user=user
+    user=Usuarium()
+    user.nm.append(buffer['n'])
+    user.dpt.append(buffer['d'])
 
+ 
     if request.method=='POST':        
         grab_data, mmsg = employee_logic(grab_data, user)
 
@@ -118,8 +126,11 @@ def nemployee():
 @app.route('/expenses', methods=['GET', 'POST'])
 def expenses():
 
-    user=user
+    user=Usuarium()
+    user.nm.append(buffer['n'])
+    user.dpt.append(buffer['d'])
 
+  
     grab_data = new_expense()
     msg = ''
 
@@ -163,7 +174,6 @@ def sales():
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
 
-    user=user
 
     list=[]
 
