@@ -196,6 +196,9 @@ def HR():
 @app.route('/Over', methods=['GET', 'POST'])
 def Master():
 
+    user=Usuarium()
+    user.set()
+
         #    Missing some logic here
 
     return render_template('master.html', title='Master', user=user)
@@ -206,6 +209,9 @@ def Master():
 
 @app.route('/master-HR', methods=['GET', 'POST'])
 def MasterHR():
+
+    user=Usuarium()
+    user.set()
 
     grab_data = deleting()
     msg='Dan'
@@ -238,6 +244,9 @@ def MasterHR():
 
 @app.route('/master-sales', methods=['GET', 'POST'])
 def Mastersales():
+
+    user=Usuarium()
+    user.set()
 
     grab_data = deletings()
     msg='Dan'

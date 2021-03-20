@@ -1,9 +1,9 @@
 
-{% if user.department()=='Sales' %}
+{% if 'Sales' in user.department() %}
 
 {% extends 'dpt-sales.html'%}
 
-{% elif user.department()=='HR' %}
+{% elif 'HR' in user.department() %}
 
 {% extends 'dpt-hr.html' %}
 
