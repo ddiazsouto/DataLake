@@ -16,8 +16,8 @@ by returning True if it finds it or False if it doesn't
 
 def TestDB(Tn):            
 
-    Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')  #   <<<----  Use this for presentation, this one goes to the cloud
-    #Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
+    # Make=pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')    <<<----  Use this for presentation, this one goes to the cloud
+    Make=pymysql.connect(host='127.0.0.1', user='root', passwd='Buddhassister22', db='main')
     MySQL=Make.cursor()
 
     MySQL.execute('show tables;')     #     Connects with the MySQL DB, 
