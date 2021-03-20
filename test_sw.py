@@ -36,7 +36,7 @@ class MyAlchemy():
 
         attempt = DanSQL()
         
-        DanSQL().write('CREATE DATABASE IF NOT EXISTS testbase;')
+        attempt.write('CREATE DATABASE IF NOT EXISTS testbase;')
         attempt.write('use testbase;')
         
         attempt.write('CREATE TABLE IF NOT EXISTS Test(column1 VARCHAR(10));')
@@ -67,10 +67,10 @@ def test4():                            # Checks that the conection with the dat
     assert MyAlchemy.connects() == True
 
 def test5():                            # Checks that the object can interact with the database using an integer
-    assert '127' in MyAlchemy.creates(127)
+    assert '127' in MyAlchemy().creates(127)
 
 def test6():                            # Checks that the object can interact with the database using a string
-    assert 'Dan' in MyAlchemy.creates("'Dan'")
+    assert 'Dan' in MyAlchemy().creates("'Dan'")
 
 
         

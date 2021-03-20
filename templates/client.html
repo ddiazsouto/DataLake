@@ -11,18 +11,17 @@
 
 
 
-        <form method='POST', action='', style="padding: 1px 1px 1px 1px; max-height: 180px; text-align: center;">
+        <form method='POST', action='', style="padding: 1px 1px 1px 1px; max-height: 150px; text-align: center;">
             <p>
                 <br><br> {{form1.hidden_tag()}}
             What do you want to do<br>
             {{form1.selection}}<br><br>
-            {{form1.pressa}}<br>
-            {{message}}
-            </p>     
+            {{form1.pressa}}
+            </p>         <p><h4>{{message}}</h4></p>
         </form>
  
 
-{% if form1.selection.data == 'N' %}
+
 
 <div class=form>
     <form method='POST', action=''>
@@ -39,24 +38,6 @@
 </div>
    
 
-{% elif form1.selection.data == 'U' %}
-
-
-
-
-<form method='POST', action='', style="padding: 1px 1px 1px 1px; max-height: 180px; text-align: center;">
-    <p>
-        <br><br> {{form1.hidden_tag()}}
-        {{form3.edit}}<br>
-    {{form3.select}}<br>
-    {{form3.narrow}}<br><br>
-    {{form3.press}}
-    </p>     
-</form>
-
-
-
-{% endif %}
 
 </center>
 

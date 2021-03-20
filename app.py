@@ -8,10 +8,9 @@ from wtforms import StringField, SubmitField, IntegerField
 # Those were the external modules 
 
 # Internal modules:
-from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection, updating
-
+from formularium import verifyU, new_client, new_employee, new_expense, deales, deleting, deletings, selection
 from elementae import Usuarium, DanSQL
-from AppLogic import process_client, navigating_client, doublecheck, employee_logic, fexpenses, dealfunct
+from AppLogic import processc
 
 # Those were the internal modules
 
@@ -68,10 +67,22 @@ def login():
     form = verifyU()
     msg=''
 
-    if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
-        template = doublecheck(user)                         #   Confirms the user and directs us
-#                                                                  to the right template
-    elif request.method=='POST':
+    if request.method=='POST':
+
+        
+        if user.check(form.login.data, form.passwd.data ) == True:
+
+
+            if user.department() == 'Sales':
+                return render_template('dpt-sales.html', form=form, title='Sales', name=user.name(), department=user.department(), user=user)
+
+            elif user.department() == 'HR':
+                return render_template('dpt-hr.html', form=form, title='HR', name=user.name(), department=user.department(), user=user)
+
+            elif user.department() == 'Master':
+                return render_template('master.html', form=form, title='Master', name=user.name(), department=user.department(), user=user)
+
+        else:
             msg='Please, wrong username or password'
 
 
@@ -86,17 +97,16 @@ def client():
 
     grab_data = new_client()
     grab = selection()
-    editing=updating()
     msg=''
     
 
     if request.method=='POST':
 
-        grab_data, msg = process_client(grab_data)         
-        editing, msg = navigating_client(editing)
+        grab_data, msg = processc(grab_data) 
 
 
-    return render_template('client.html', form3=editing, message=msg, form1=grab, form=grab_data, user=user)
+
+    return render_template('client.html', title='New Client', message=msg, form1=grab, form=grab_data, user=user)
 
 
 
