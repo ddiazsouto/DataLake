@@ -1,6 +1,16 @@
 usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR', 'SupremeOverlord':'Master'}
 import pymysql
 
+def unscape(string):
+
+    output = str(string)
+    output = output[output.index("('")+2:output.index("',)")]
+        
+    return output
+    
+
+
+
 class Usuarium():
 
     def __init__(self):
@@ -23,8 +33,8 @@ class Usuarium():
 
     def set(self):
 
-        self.nm  = str(DanSQL().get('select user from log where date=(select max(date) from log);'))
-        self.dpt = str(DanSQL().get('select department from log where date=(select max(date) from log);'))
+        self.nm  = unscape(DanSQL().get('select user from log where date=(select max(date) from log);'))
+        self.dpt = unscape(DanSQL().get('select department from log where date=(select max(date) from log);'))
 
 
 
@@ -54,14 +64,20 @@ class DanSQL():
         self.Make = pymysql.connect(host='34.121.192.21', user='root', passwd='645202398', db='main')
         self.MySQL = self.Make.cursor()
 
+
+
     def sudo(self):
 
         self.Make.commit()
+
+
 
     def write(self, str):
 
         self.MySQL.execute(str)
         self.sudo()
+
+
 
     def injects(self, str):
 
@@ -70,6 +86,8 @@ class DanSQL():
         init.MySQL.execute(str)
         init.sudo()
         init.off()
+
+
 
     def get(self, str):
 
@@ -80,10 +98,17 @@ class DanSQL():
         init.off()
         return out
 
+
+
     def off(self):
        
         self.Make.close()
         self.MySQL.close()
+
+
+
+
+
 
 
 class ListForm():

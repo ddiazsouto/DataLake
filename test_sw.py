@@ -1,5 +1,7 @@
-from elementae import Usuarium, DanSQL
+from elementae import unscape, Usuarium, DanSQL
 import pytest
+
+
 
 class Testuser():
 
@@ -55,6 +57,8 @@ class MyAlchemy():
 
 
 
+
+
 def test0():                            # Checks the efficiency of class Usuarium in taking user Daniel
     assert Testuser.run('Daniel') == True
 
@@ -75,6 +79,14 @@ def test5():                            # Checks that the object can interact wi
 
 def test6():                            # Checks that the object can interact with the database using a string
     assert 'Dan' in MyAlchemy.creates("'Dan'")
+
+def test7():
+    assert unscape("(('Daniel',),)") == 'Daniel'
+
+def test8():
+    assert unscape("(('HR',),)") == 'HR'
+
+
 
 
         
