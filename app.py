@@ -218,7 +218,7 @@ def MasterHR():
     list=[]
 
     if request.method=='GET':
-        list=MySQL.get('SELECT * from HR;')
+        list=DanSQL().get('SELECT * from HR;')
     
     if request.method == 'POST':
 
@@ -228,7 +228,7 @@ def MasterHR():
         msg=''
 
         if int(action) == 1:
-            list=MySQL.get(f"SELECT * from HR WHERE date='{selection}';")   
+            list=DanSQL().get(f"SELECT * from HR WHERE date='{selection}';")   
             msg = 'This is what you selected'     
             return render_template('masterhr.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
 
@@ -253,7 +253,7 @@ def Mastersales():
     list=[]
 
     if request.method=='GET':
-        list=MySQL.get('SELECT * from sales;')
+        list=DanSQL().get('SELECT * from sales;')
     
     if request.method == 'POST':
 
@@ -263,12 +263,12 @@ def Mastersales():
         msg =f'Not Dan, POST{action}, {selection}'    
 
         if int(action) == 1:
-            list=MySQL.get(f"SELECT * from sales WHERE date='{selection}';")   
+            list=DanSQL().get(f"SELECT * from sales WHERE date='{selection}';")   
             msg =f'Not Dan, POST{action}, {selection}'    
             return render_template('mastersales.html', title='HR edit', form=grab_data, list=list, user=user, message=msg)
 
         elif int(action) == 2:
-            MySQL.write(f"DELETE from sales WHERE date='{selection}';")
+            DanSQL().write(f"DELETE from sales WHERE date='{selection}';")
             msg = 'Enty deleted successfully' 
 
 
