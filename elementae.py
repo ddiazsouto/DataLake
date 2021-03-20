@@ -1,4 +1,4 @@
-usuarios = {'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR', 'SupremeOverlord':'Master'}
+usuarios = {'Test':'Testeator', 'Daniel':'Sales', 'John':'HR', 'Jack':'Sales', 'Wesley':'HR', 'SupremeOverlord':'Master'}
 import pymysql
 
 def unscape(string):
@@ -39,21 +39,25 @@ class Usuarium():
 
 
     def name(self):
+
+        return self.nm
         
-        try:
-            return self.nm
-        except Exception as e:
-            out = str(e) + str(len(self.nm)) 
-            return out
+        # try:
+        #     return self.nm
+        # except Exception as e:
+        #     out = str(e) + str(len(self.nm)) 
+        #     return out
             
 
     def department(self):
-        try:
-            return self.dpt
 
-        except Exception as e:
-            out = str(e) + str(len(self.nm)) 
-            return out
+        return self.dpt
+        # try:
+        #     return self.dpt
+
+        # except Exception as e:
+        #     out = str(e) + str(len(self.nm)) 
+        #     return out
             
 
 

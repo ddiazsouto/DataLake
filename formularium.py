@@ -61,6 +61,7 @@ class deales(FlaskForm):
     close_deal = SubmitField('Close deal')
 
 
+
 class deleting(FlaskForm):
 
     many=[]

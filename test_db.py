@@ -44,7 +44,7 @@ def test3():
     assert TestDB('client') == True
 
 def test4():
-    assert TestDB('xpense') == True
+    assert TestDB('expense') == True
 
 
 """

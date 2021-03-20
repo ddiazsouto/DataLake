@@ -152,6 +152,7 @@ def deals():
     msg=''
 
     if request.method=='POST':
+        
         grab_data, msg = dealfunct(grab_data)                     
 
     return render_template('deals.html', title='Deals', user=user, form=grab_data, message=msg)

@@ -1,24 +1,22 @@
-from elementae import unscape, Usuarium, DanSQL
+from elementae import unscape, Usuarium, DanSQL, usuarios
 import pytest
 
 
 
 class Testuser():
 
-    def run(any):
-        trial = Usuarium()
-        start_value=len(trial.dpt)
-        trial.check(any, 'QA123@')
-        if len(trial.dpt) != 0:
-            if len(trial.dpt) == start_value +1:
-                return True
+    def runcheck( any):
+        trial = Usuarium()                  # Here we test that out object does the job checking the user
+        return trial.check(any, 'QA123@')   #        in the login menu
+        
 
-    def nombre(any):
-        trial = Usuarium()
-        start_value=len(trial.nm)
-        trial.check(any, 'QA123@')
-        if trial.name() == any:
-            return True
+    def retain():
+        trial = Usuarium()                          # here we test that the object works as desired,
+        if trial.nm == '' and trial.dpt == '':     #  that it initialises as an empty string
+            
+            trial.set()                          # that it activates the object with the active user
+
+            return len(trial.nm) > 1 and len(trial.dpt) > 1     # and that it retains information correctly
 
 
 
@@ -59,17 +57,17 @@ class MyAlchemy():
 
 
 
-def test0():                            # Checks the efficiency of class Usuarium in taking user Daniel
-    assert Testuser.run('Daniel') == True
+def test0():                            # Checks the efficiency of class Usuarium logging the testing
+    assert Testuser.runcheck('Test') == True
 
 def test1():                            # Checks the efficiency of class Usuarium in taking user Daniel
-    assert Testuser.nombre('Daniel') == True
+    assert Testuser.runcheck('Daniel') == True
 
 def test2():                            # Checks the efficiency of class Usuarium in taking user Wesley
-    assert Testuser.run('Wesley') == True
+    assert Testuser.runcheck('Wesley') == True
 
 def test3():                            # Checks the efficiency of class Usuarium in taking user Wesley
-    assert Testuser.nombre('Wesley') == True
+    assert Testuser.retain() == True
 
 def test4():                            # Checks that the conection with the database is successful for the object
     assert MyAlchemy.connects() == True
