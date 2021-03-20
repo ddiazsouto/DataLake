@@ -127,14 +127,14 @@ def identitydirect(user):
 
     takeme_to=''
 
-    if user.department() == 'Sales':
+    if  'Sales' in user.department() :
         takeme_to = 'dpt-sales.html'
 
-    elif user.department() == 'HR':
+    elif 'HR' in user.department():
         takeme_to = 'dpt-hr.html'
         
 
-    elif user.department() == 'Master':
+    elif 'Master' in user.department():
         takeme_to = 'master.html'
        
 

@@ -4,8 +4,9 @@ import pymysql
 class Usuarium():
 
     def __init__(self):
-        self.nm=[]
-        self.dpt=[]
+
+        self.nm=''
+        self.dpt=''
 
         
     def check(self, login, passwd):
@@ -14,19 +15,23 @@ class Usuarium():
 
         if login in usuarios and passwd == clave:
 
-            self.nm=[]
-            self.dpt = []
-
             department = usuarios[login]
-            self.nm.append(login)
-            self.dpt.append(department)
-
+            DanSQL().write('CREATE TABLE IF NOT EXISTS log(date DATETIME, user VARCHAR(20), department VARCHAR(20));')
+            DanSQL().write(f"INSERT INTO log(date, user, department) VALUES (now(), '{login}', '{department}');")
+           
             return True
+
+    def set(self):
+
+        self.nm  = str(DanSQL().get('select user from log where date=(select max(date) from log);'))
+        self.dpt = str(DanSQL().get('select department from log where date=(select max(date) from log);'))
+
+
 
     def name(self):
         
         try:
-            return self.nm[0]
+            return self.nm
         except Exception as e:
             out = str(e) + str(len(self.nm)) 
             return out
@@ -34,8 +39,11 @@ class Usuarium():
 
     def department(self):
         try:
-            return self.dpt[0]
-        except: return None
+            return self.dpt
+
+        except Exception as e:
+            out = str(e) + str(len(self.nm)) 
+            return out
             
 
 

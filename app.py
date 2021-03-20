@@ -63,31 +63,20 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
+    user = Usuarium()
+    
+
     template='login.html'
 
     form = verifyU()
     msg=''
 
     if request.method=='POST' and user.check(form.login.data, form.passwd.data ) == True:
+        user.set()
         template = identitydirect(user)                         #   Confirms the user and directs us
 #                                                                  to the right template
     elif request.method=='POST':
             msg='Please, wrong username or password'
-
-
-    @app.route('/new-employee')#, methods=['GET', 'POST'])
-    def nemployee():
-
-        grab_data = new_employee()
-        msg =''
-
-        if request.method=='POST':        
-            grab_data, mmsg = employee_logic(grab_data, user)
-
-        return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
-
-
-
 
 
     return render_template(template, title='Log-in', form=form, message=msg, user=user)
@@ -98,6 +87,9 @@ def login():
 
 @app.route('/add-client', methods=['GET', 'POST'])
 def client():
+
+    user=Usuarium()
+    user.set()
 
     grab_data = new_client()
     grab = selection()
@@ -115,16 +107,16 @@ def client():
 
 
 
-# @app.route('/new-employee', methods=['GET', 'POST'])
-# def nemployee():
+@app.route('/new-employee', methods=['GET', 'POST'])
+def nemployee():
 
-#     grab_data = new_employee()
-#     msg =''
+    grab_data = new_employee()
+    msg =''
 
-#     if request.method=='POST':        
-#         grab_data, mmsg = employee_logic(grab_data, user)
+    if request.method=='POST':        
+        grab_data, mmsg = employee_logic(grab_data, user)
 
-#     return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
+    return render_template('nemployee.html', title='New employee', form=grab_data, message=msg, user=user)
 
 
 
@@ -161,6 +153,9 @@ def deals():
 @app.route('/sales')
 def sales():
 
+    user=Usuarium()
+    user.set()
+
     list=[]
 
     if request.method=='GET':
@@ -173,7 +168,7 @@ def sales():
 
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
-    
+
     list=[]
 
     if request.method=='GET':
