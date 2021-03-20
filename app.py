@@ -101,7 +101,7 @@ def client():
 
 
 @app.route('/new-employee', methods=['GET', 'POST'])
-def nemployee():
+def nemployee(user):
 
     grab_data = new_employee()
     msg =''
@@ -114,7 +114,7 @@ def nemployee():
 
 
 @app.route('/expenses', methods=['GET', 'POST'])
-def expenses():
+def expenses(user):
 
     grab_data = new_expense()
     msg = ''
@@ -157,7 +157,7 @@ def sales():
 
 
 @app.route('/HR', methods=['GET', 'POST'])
-def HR():
+def HR(user):
 
     list=[]
 
