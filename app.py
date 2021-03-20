@@ -110,6 +110,9 @@ def client():
 @app.route('/new-employee', methods=['GET', 'POST'])
 def nemployee():
 
+    user=Usuarium()
+    user.set()
+
     grab_data = new_employee()
     msg =''
 
@@ -122,6 +125,9 @@ def nemployee():
 
 @app.route('/expenses', methods=['GET', 'POST'])
 def expenses():
+
+    user=Usuarium()
+    user.set()
 
     grab_data = new_expense()
     msg = ''
@@ -138,6 +144,9 @@ def expenses():
 
 @app.route('/deals', methods=['GET', 'POST'])
 def deals():
+
+    user=Usuarium()
+    user.set()
 
     grab_data=deales() 
     msg=''
@@ -168,6 +177,9 @@ def sales():
 
 @app.route('/HR', methods=['GET', 'POST'])
 def HR():
+
+    user=Usuarium()
+    user.set()
 
     list=[]
 
