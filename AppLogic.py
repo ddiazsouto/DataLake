@@ -83,55 +83,62 @@ def identitydirect(user):
 
 def employee_logic(grab_data, user):
 
-        emp_name = grab_data.emp_name.data
-        emp_surname= grab_data.emp_surname.data
-        role = grab_data.role.data
-        team = grab_data.team.data
-        department= user.department()   #   Department defined automatically
+    emp_name = grab_data.emp_name.data
+    emp_surname= grab_data.emp_surname.data
+    role = grab_data.role.data
+    team = grab_data.team.data
+    department= user.department()   #   Department defined automatically
+    
+    if len(emp_name)*len(emp_surname)*len(role)*len(team) != 0 :
+
+        DanSQL().write(f"INSERT INTO employee(name, surname, position, team, department) VALUES('{emp_name}','{emp_surname}','{role}','{team}','{department}');")
+        grab_data.emp_name.data = grab_data.emp_surname.data = grab_data.role.data = grab_data.team.data = ''
+
+        msg = 'new employee added'
         
-        if len(emp_name)*len(emp_surname)*len(role)*len(team) != 0 :
+    else:
+        msg = 'Please fill in the required fields'
 
-            DanSQL().write(f"INSERT INTO employee(name, surname, position, team, department) VALUES('{emp_name}','{emp_surname}','{role}','{team}','{department}');")
-            grab_data.emp_name.data = grab_data.emp_surname.data = grab_data.role.data = grab_data.team.data = ''
-
-            msg = 'new employee added'
-            
-        else:
-            msg = 'Please fill in the required fields'
-
-        return grab_data, msg
+    return grab_data, msg
 
 
 def fexpenses(grab_data, user):
 
     
-        amount = float(grab_data.amount.data)
-        details = str(grab_data.details.data)
-        expense_id = int(grab_data.nature.data)
-        manager = user.name()
+    amount = grab_data.amount.data
+    details = str(grab_data.details.data)
+    expense_id = int(grab_data.nature.data)
+    manager = user.name()
 
 
-        if amount*len(details) != 0:
+    if type(amount)==float and len(details) > 0:
 
-            DanSQL().write(f"INSERT INTO HR(date, expense_id, amount, details, manager) values (now(), {expense_id}, {amount}, '{details}', '{manager}');")
+        DanSQL().write(f"INSERT INTO HR(date, expense_id, amount, details, manager) values (now(), {expense_id}, {amount}, '{details}', '{manager}');")
 
-            grab_data.amount.data = 0.0
-            grab_data.details.data = ''
-            msg = 'New expense added'
+        grab_data.details.data = ''
+        msg = 'New expense added'
 
-        else:
-            msg = 'Please fill in the fields with valid information'
+    else:
+        msg = 'Please fill in the required fields with valid information'
 
-        return grab_data, msg
+    return grab_data, msg
 
 def dealfunct(grab_data):
 
-        amount      = float(grab_data.amount.data)
-        client_id   = int(grab_data.client_id.data)
-        employee_id = int(grab_data.employee_id.data)
+    try:
+        amount  = float(grab_data.amount.data)
+    except:
+        amount = 0
+           
+
+    client_id   = int(grab_data.client_id.data)
+    employee_id = int(grab_data.employee_id.data)
+    msg=''
+
+    if amount >0 :    
                 
         DanSQL().write(f"insert into sales(date, client_id, employee_id, amount) values(now(), {client_id}, {employee_id}, {amount});")
         grab_data.amount.data =  ''
         msg = 'Deal added'
 
-        return grab_data, msg
+    return grab_data, msg

@@ -78,8 +78,12 @@ class DanSQL():
 
     def write(self, str):
 
-        self.MySQL.execute(str)
-        self.sudo()
+        init=DanSQL()
+
+        init.MySQL.execute(str)
+        init.sudo()
+        init.off()      
+        
 
 
 
