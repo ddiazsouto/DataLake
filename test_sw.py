@@ -60,16 +60,15 @@ class MyAlchemy():
 
     def creates(value):
 
-        attempt = DanSQL()
-        
-        attempt.write('CREATE DATABASE IF NOT EXISTS testbase;')
-        attempt.write('use testbase;')        
-        attempt.write('CREATE TABLE IF NOT EXISTS Test(column1 VARCHAR(10));')
-        attempt.write(f'INSERT INTO Test(column1) values({str(value)});')        
-        var = attempt.get('SELECT * FROM testbase.Test;')
-        attempt.write('DROP DATABASE testbase;')
+                
+        DanSQL().write('CREATE DATABASE IF NOT EXISTS testbase;')
+        DanSQL().write('USE testbase;')        
+        DanSQL().write('CREATE TABLE IF NOT EXISTS Test(column1 VARCHAR(10));')
+        DanSQL().write(f'INSERT INTO Test(column1) values({str(value)});')        
+        var = DanSQL().get('SELECT * FROM Test;')
+        DanSQL().write('DROP DATABASE testbase;')
 
-        attempt.off()
+        
 
         return str(var)    
 

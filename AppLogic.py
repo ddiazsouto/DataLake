@@ -141,4 +141,7 @@ def dealfunct(grab_data):
         grab_data.amount.data =  ''
         msg = 'Deal added'
 
+    else:
+        msg = 'Please fill in the required fields with valid information'
+
     return grab_data, msg
