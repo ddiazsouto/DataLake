@@ -106,8 +106,11 @@ def test8():
 Here we test the AppLogic module
 """
 
-from AppLogic import identitydirect
-
+from AppLogic import identitydirect, process_client
+from formularium import verifyU, new_client
+from test_db import TestBase
+from flask import url_for
+from app import app
 
 
 def RedirectLogic(user_dpt):
@@ -115,7 +118,95 @@ def RedirectLogic(user_dpt):
     attempt = Usuarium()
     attempt.dpt = user_dpt                # we modify the department directly
 
-    return identitydirect(attempt)        # This method takes in a Usuarium object from 'elementae' module
+    return identitydirect(attempt)        # This method takes in a Usuarium object 
+
+    #                                                from 'elementae' module
+
+class LogicInteract(TestBase):
+
+    def test_add_post(self):
+        response = self.client.post(
+            url_for('login'),
+            data = dict(login='Daniel', passwd='QA123'),
+         
+            follow_redirects=True
+        )
+
+
+    def test_add_post0(self):              # Checks that the page is stable
+
+        response = self.client.post(       #  in /add-client, both
+            url_for('client'),
+            data = dict(selection='U',     #     Updating
+                edit='Any text'),                   
+            follow_redirects=True
+        )             
+        response = self.client.post(       #   And adding a 
+            url_for('client'),
+            data = dict(selection='N',      #   new entry
+                edit='Any text'),                   
+            follow_redirects=True
+        )
+
+
+    def test_add_post1(self):               # This has SelectField
+        response = self.client.post(
+            url_for('expenses'),
+            data = dict(amount=50.05, details='Reason of the expense'),         
+            follow_redirects=True
+        )
+      
+      
+    
+    def test_add_post2(self):
+        response = self.client.post(
+            url_for('nemployee'),
+            data = dict(name='Dan', surname='Souto', position='Trainee', team='Dara\'s', department='DevOps'),         
+            follow_redirects=True   # Tests the page with form /new-employee
+        )
+
+      
+    def test_add_post3(self):               #This has SelectField
+        response = self.client.post(
+            url_for('deals'),
+            data = dict(amount=1234, client_id=5, employee_id=5),         
+            follow_redirects=True   # Tests the page /deals
+        )
+
+    def test_add_post4(self):               #This has SelectField
+        response = self.client.post(
+            url_for('what'),
+            data = dict(action=1, selection='2021-03-21 15:05:36'),         
+            follow_redirects=True   # Tests the page /deals
+        )
+
+        response = self.client.post(
+            url_for('what'),
+            data = dict(action=2, selection='2021-03-21 15:05:36'),         
+            follow_redirects=True   # Tests the page /deals
+        )
+
+    def test_add_post5(self):               #This has SelectField
+        response = self.client.post(
+            url_for('Mastersales'),
+            data = dict(action=1, selection='2021-03-21 15:05:36'),         
+            follow_redirects=True   # Tests the page /deals
+        )
+
+        response = self.client.post(
+            url_for('Mastersales'),
+            data = dict(action=2, selection='2021-03-21 15:05:36'),         
+            follow_redirects=True   # Tests the page /deals
+        )
+
+
+
+
+"""
+Testing the logic in code for AppLogic
+
+"""
+
 
 
 
@@ -132,3 +223,6 @@ def test11():
 
 def test12():
     assert RedirectLogic('testeator') == 'login.html' 
+
+# def test13():
+#     assert TestProcessClient ('QA Ltd','Daniel','Diaz Souto','647897997','') != ''

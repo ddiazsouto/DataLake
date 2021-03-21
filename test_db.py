@@ -3,7 +3,7 @@ import pymysql
 from flask_testing import TestCase
 from flask import url_for
 
-from core import app, db
+from app import app, db
 from tables import Expenses, Sales, Employee, HR, Client
 
 
@@ -103,19 +103,18 @@ class TestViews(TestBase):  # This test confirms that the page loads
         response = self.client.get(url_for('HR'))
         self.assertEqual(response.status_code, 200)
         
-    # def client(self):
-    #     response = self.client.get(url_for('add-client'))
-    #     self.assertEqual(response.status_code, 200)
+    def client(self):
+        response = self.client.get(url_for('add-client'))
+        self.assertEqual(response.status_code, 200)
 
+    def client(self):
+        response = self.client.get(url_for('Master'))
+        self.assertEqual(response.status_code, 200)
 
-# Test ready for employee formulary
+    def client(self):
+        response = self.client.get(url_for('Mastersales'))
+        self.assertEqual(response.status_code, 200)
 
-# class TestAdd(TestBase):
-#     def test_add_post(self):
-#         response = self.client.post(
-#             url_for('home'),
-#             data = dict(name='Dan', surname='Souto', position='Trainee', team='Dara\'s', department='DevOps'),
-         
-#             follow_redirects=True
-#         )
-      
+    def client(self):
+        response = self.client.get(url_for('MasterHR'))
+        self.assertEqual(response.status_code, 200)

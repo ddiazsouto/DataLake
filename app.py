@@ -25,6 +25,19 @@ First the connection the database through SQLAlchemy
 
 
 
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:645202398@34.121.192.21/main'   
+#app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:Buddhassister22@127.0.0.1/main'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.config['SECRET_KEY']='dAnIel52'
+
+
+db=SQLAlchemy(app)
 
 
 
@@ -39,7 +52,7 @@ user = Usuarium()                         # We create an object to control the u
 
 MySQL=DanSQL()
 
-now = datetime.now()
+# now = datetime.now()
 
 
 
@@ -162,7 +175,7 @@ def sales():
     list=[]
 
     if request.method=='GET':
-        list=MySQL.get('SELECT * from client;')
+        list=MySQL.get('SELECT s.date, e.name, e.surname, s.amount FROM sales s JOIN employee e ON s.employee_id=e.id;')
 
     return render_template('dpt-sales.html', title='Sales', user=user, list=list)
 
@@ -178,7 +191,7 @@ def HR():
     list=[]
 
     if request.method=='GET':
-        list=MySQL.get('SELECT * from HR;')
+        list=MySQL.get('SELECT hr.date, hr.details, e.nature, hr.manager, hr.amount FROM HR hr JOIN expenses e ON hr.expense_id=e.id;')
         
 
     return render_template('dpt-hr.html', title='Human Resources', user=user, list=list)
@@ -202,7 +215,7 @@ def Master():
 
 
 @app.route('/master-HR', methods=['GET', 'POST'])
-def MasterHR():
+def what():
 
     user=Usuarium()
     user.set()
@@ -212,7 +225,7 @@ def MasterHR():
     list=[]
 
     if request.method=='GET':
-        list=DanSQL().get('SELECT * from HR;')
+        list=DanSQL().get('SELECT hr.date, hr.details, e.nature, hr.manager, hr.amount FROM HR hr JOIN expenses e ON hr.expense_id=e.id;')
     
     if request.method == 'POST':
 
@@ -247,7 +260,7 @@ def Mastersales():
     list=[]
 
     if request.method=='GET':
-        list=DanSQL().get('SELECT * from sales;')
+        list=DanSQL().get(' SELECT s.date, c.company_name, s.amount FROM sales s JOIN client c ON s.client_id=c.id;')
     
     if request.method == 'POST':
 
